@@ -1,18 +1,33 @@
-import React from 'react'
+import React,{useState} from 'react'
+import { Link } from '@tanstack/react-location'
 import Header from '../../component/header'
+import Login from '../auth/Login';
 
 
 const Root = () => {
+  let [isOpen, setIsOpen] = useState(false)
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
   return (
     <div className='w-full' >
       <Header/>
       <div className='
-        absolute 
-        left-1/2 
-        top-1/2 
-        transform -translate-x-1/2 -translate-y-1/2
-        text-center'
+        flex
+        justify-center
+        items-center
+        text-center
+        h-screen
+        w-screen
+        
+        '
       >
+        <div className='content'>
        
           <div className='text-4xl'>
             An Online quiz platform with Transparency
@@ -28,13 +43,17 @@ const Root = () => {
             Be one of the quiz maker or be the quiz taker. you decide. 
           </div>
           <div className='p-2'>
-            <button  className='p-2 '>
+            <button  className='p-2' 
+              onClick={()=>setIsOpen(true)}
+            >
+              
               Join us now
+            
             </button>
           </div>
-       
+        </div>
       </div>
-     
+      <Login isOpen={isOpen} closeModal={closeModal} />
     </div>
   )
 }
