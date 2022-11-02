@@ -4,13 +4,19 @@ import Label from '../../component/elements/label';
 import Input from '../../component/elements/input';
 import Button from '../../component/elements/button';
 import PropTypes from 'prop-types';
+import Select from '../../component/elements/Select';
 
-
+const Account = [
+  {value: 0, name: 'Select Account'},
+  {value: 1, name: 'Student'},
+  {value: 1, name: 'Teacher'},
+];
 const Register = ({isOpen, closeModal}) => {
   const [data, setData] = useState({
     email: null,
     password: null,
     confirm_password: null,
+    account: Account[0],
   });
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -67,6 +73,21 @@ const Register = ({isOpen, closeModal}) => {
                 </Dialog.Title>
                 <div className="mt-7">
                   <form className="w-full max-w-sm">
+                    <div className="md:flex md:items-center mb-6">
+                      <div className="md:w-1/3">
+                        <Label content={'Account'}/>
+                      </div>
+                      <div className="md:w-2/3">
+                        <Select
+                          width={52}
+                          Lists={Account}
+                          selected={data.account}
+                          setSelected={(e)=>
+                            setData({...data, account: e})
+                          }
+                        />
+                      </div>
+                    </div>
                     <div className="md:flex md:items-center mb-6">
                       <div className="md:w-1/3">
                         <Label content={'Email'}/>
