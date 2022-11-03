@@ -70,6 +70,7 @@ const Register = ({isOpen, closeModal}) => {
               overflow-hidden
               rounded-2xl
               bg-white
+              dark:bg-zinc-800
               p-6
               text-center
               align-middle

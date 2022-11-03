@@ -16,6 +16,7 @@ const Select=({Lists, setSelected, selected})=>{
                 cursor-default
                 rounded-lg
                 bg-white
+                dark:bg-slate-700
                 py-2
                 pl-3
                 pr-10

@@ -11,12 +11,14 @@ const Button = ({onClick}) => {
         border
         border-transparent
         bg-purple-400
+        dark:bg-purple-700
         px-4
         py-2
         text-sm
         font-medium
         text-white
         hover:bg-purple-500
+        dark:hover:bg-purple-800
         focus:outline-none
         focus-visible:ring-2
         focus-visible:ring-blue-500

@@ -1,19 +1,15 @@
 import Axios from 'axios';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
-const apiService = Axios.create();
 
-const withToken = (config) => {
-  const token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 
-  return {
-    ...config,
-    headers: {
-      ...config.headers,
-      ...(token ? {Authorization: `Bearer ${token}`} : {}),
-    },
-  };
-};
+const apiService = Axios.create({
+  baseURL: 'http://127.0.0.1:8000/api',
+  timeout: 3000,
+  headers: {'Authorization': 'Bearer '+token},
+});
+
+
 apiService.interceptors.response.use(
     function(response) {
       return response;
@@ -30,7 +26,6 @@ apiService.interceptors.response.use(
       }
     },
 );
-apiService.interceptors.request.use(withToken);
-apiService.defaults.baseURL = baseUrl;
+
 
 export default apiService;
