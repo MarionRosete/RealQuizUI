@@ -4,9 +4,9 @@ import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid';
 import PropTypes from 'prop-types';
 
 
-const Select=({Lists, setSelected, selected, width})=>{
+const Select=({Lists, setSelected, selected})=>{
   return (
-    <div className={`fixed top-16 w-${width}`}>
+    <div className={`fixed top-16 w-44`}>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button
@@ -109,6 +109,5 @@ Select.propTypes={
   Lists: PropTypes.array,
   setSelected: PropTypes.func,
   selected: PropTypes.object,
-  width: PropTypes.string,
 };
 export default Select;
