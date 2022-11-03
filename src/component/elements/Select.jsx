@@ -89,7 +89,7 @@ const Select=({Lists, setSelected, selected, width})=>{
                             flex
                             items-center
                             pl-3
-                            text-amber-600">
+                            text-purple-600">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                         </span>
                       ) : null}
@@ -109,6 +109,6 @@ Select.propTypes={
   Lists: PropTypes.array,
   setSelected: PropTypes.func,
   selected: PropTypes.object,
-  width: PropTypes.number,
+  width: PropTypes.string,
 };
 export default Select;

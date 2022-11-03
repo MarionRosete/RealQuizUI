@@ -79,7 +79,7 @@ const Register = ({isOpen, closeModal}) => {
                       </div>
                       <div className="md:w-2/3">
                         <Select
-                          width={52}
+                          width={'52'}
                           Lists={Account}
                           selected={data.account}
                           setSelected={(e)=>
