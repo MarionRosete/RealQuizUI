@@ -103,17 +103,17 @@ const Register = ({isOpen, closeModal}) => {
                     <XMarkIcon />
                   </div>
                 </div>
-                <Dialog.Title className="text-lg
+                <Dialog.Title className="text-3xl
                   font-medium
                   font-bold
                   leading-10
                   text-gray-900
                   text-purple-700"
                 >
-                  Sign In
+                  Sign Up
                 </Dialog.Title>
                 <div className="mt-10">
-                  {
+                  {error !==null&&
                     <div className='pb-4 text-red-700 text-sm'>
                       {error}
                     </div>

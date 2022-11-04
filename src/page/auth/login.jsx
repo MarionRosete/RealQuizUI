@@ -7,13 +7,34 @@ import PropTypes from 'prop-types';
 import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-
+import {loginAPI} from '../../api/auth';
+import {useEffect} from 'react';
+import {validateEmail} from '../../helper/ValidateEmail';
 
 const Login = ({isOpen, closeModal}) => {
   const [data, setData] = useState({
     email: null,
     password: null,
   });
+  const [error, setError] = useState(null);
+
+  const initState = {
+    email: null,
+    password: null,
+  };
+  useEffect(()=>{
+    if (!isOpen) {
+      setData(initState); setError(null);
+    }
+  }, [isOpen]);
+  const handleLogin = async ()=>{
+    const request = await loginAPI(data);
+    if (request.status===200) {
+      localStorage.setItem('token', request.data.token);
+    } else {
+      setError(request.response.data.message);
+    }
+  };
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -63,25 +84,30 @@ const Login = ({isOpen, closeModal}) => {
                     <XMarkIcon />
                   </div>
                 </div>
-                <Dialog.Title className="text-lg
+                <Dialog.Title className="text-3xl
                   font-medium
                   font-bold
                   leading-10
                   text-gray-900
                   text-purple-700"
                 >
-                 Sign Up
+                 Sign In
                 </Dialog.Title>
-                <div className="mt-7">
+                <div className="mt-10">
+                  {error !==null&&
+                    <div className='pb-4 text-red-700 text-sm'>
+                      {error}
+                    </div>
+                  }
                   <form className="w-full max-w-sm">
                     <div className="md:flex md:items-center mb-6">
                       <div className="md:w-1/3">
-                        <Label content={'Username'}/>
+                        <Label content={'Email'}/>
                       </div>
                       <div className="md:w-2/3">
                         <Input
                           type={'text'}
-                          placeholder={'Username'}
+                          placeholder={'Email'}
                           onChange={(e)=>
                             setData(
                                 {...data,
@@ -109,7 +135,12 @@ const Login = ({isOpen, closeModal}) => {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <Button onClick={closeModal}/>
+                      <Button onClick={handleLogin}
+                        disabled={
+                          (data.email===null||!validateEmail(data.email))||
+                          (data.password===null||data.password==='')
+                        }
+                      />
                     </div>
                   </form>
                 </div>

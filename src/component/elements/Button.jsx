@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Button = ({onClick}) => {
+const Button = ({onClick, disabled}) => {
   return (
     <button
       type="button"
@@ -22,8 +22,10 @@ const Button = ({onClick}) => {
         focus:outline-none
         focus-visible:ring-2
         focus-visible:ring-blue-500
-        focus-visible:ring-offset-2"
+        focus-visible:ring-offset-2
+        disabled:bg-gray-300"
       onClick={onClick}
+      disabled={disabled}
     >
         Sign Up
     </button>
@@ -32,6 +34,7 @@ const Button = ({onClick}) => {
 
 Button.propTypes = {
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default Button;
