@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const Input = ({type, onChange, placeholder}) => {
+const Input = ({type, onChange, placeholder, max}) => {
   return (
     <input className="bg-gray-200
         dark:bg-slate-700
@@ -23,6 +23,8 @@ const Input = ({type, onChange, placeholder}) => {
     type={type}
     placeholder={placeholder}
     onChange={onChange}
+    maxLength={max}
+    size={max}
     />
   );
 };
@@ -30,6 +32,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   type: PropTypes.string,
+  max: PropTypes.string,
 };
 
 export default Input;

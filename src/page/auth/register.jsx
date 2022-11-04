@@ -159,6 +159,7 @@ const Register = ({isOpen, closeModal}) => {
                       </div>
                       <div className="md:w-2/3">
                         <Input
+                          max={'50'}
                           type={'text'}
                           placeholder={'Name'}
                           onChange={(e)=>
