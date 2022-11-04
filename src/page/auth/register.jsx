@@ -1,14 +1,15 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
 import Label from '../../component/elements/label';
-import Input from '../../component/elements/input';
-import Button from '../../component/elements/button';
+import Input from '../../component/elements/Input';
+import Button from '../../component/elements/Button';
 import PropTypes from 'prop-types';
 import Select from '../../component/elements/Select';
 import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {registerAPI} from '../../api/auth';
+import {validateEmail} from '../../helper/ValidateEmail';
 
 const Account = [
   {value: 0, name: 'Select Account'},
@@ -20,17 +21,38 @@ const Register = ({isOpen, closeModal}) => {
     email: null,
     name: null,
     password: null,
-    confirm_password: null,
+    password_confirmation: null,
     role: Account[0],
   });
+  const [error, setError] = useState(null);
+  const initState = {
+    email: null,
+    name: null,
+    password: null,
+    password_confirmation: null,
+    role: Account[0],
+  };
+  useEffect(()=>{
+    //  CLEAR STATE
+    if (!isOpen) {
+      setData(initState); setError(null);
+    };
+  }, [isOpen]);
+
   const handleRegister = async ()=>{
     const request = await registerAPI({...data,
       role: data.role.name.toLocaleLowerCase(),
     });
+
     if (request.status===200) {
-      localStorage.setItem('token', request.token);
+      localStorage.setItem('token', request.data.token);
+      setData({initState});
+    } else {
+      setError(request.response.data.message);
     }
   };
+
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -91,6 +113,11 @@ const Register = ({isOpen, closeModal}) => {
                   Sign In
                 </Dialog.Title>
                 <div className="mt-10">
+                  {
+                    <div className='pb-4 text-red-700 text-sm'>
+                      {error}
+                    </div>
+                  }
                   <form className="w-full max-w-sm"
                     onSubmit={(e)=>{
                       e.preventDefault();
@@ -128,12 +155,12 @@ const Register = ({isOpen, closeModal}) => {
                     </div>
                     <div className="md:flex md:items-center mb-6">
                       <div className="md:w-1/3">
-                        <Label content={'Full name'}/>
+                        <Label content={'Name'}/>
                       </div>
                       <div className="md:w-2/3">
                         <Input
                           type={'text'}
-                          placeholder={'Full name'}
+                          placeholder={'Name'}
                           onChange={(e)=>
                             setData({...data, name: e.target.value})
                           }
@@ -163,13 +190,26 @@ const Register = ({isOpen, closeModal}) => {
                           type={'password'}
                           placeholder={'*************'}
                           onChange={(e)=>
-                            setData({...data, confirm_password: e.target.value})
+                            setData({...data, password_confirmation:
+                              e.target.value})
                           }
                         />
                       </div>
                     </div>
                     <div className="mt-4">
-                      <Button onClick={()=>handleRegister()}/>
+                      <Button
+                        onClick={handleRegister}
+                        disabled={
+                          (data.email===null||!validateEmail(data.email))||
+                          data.name===null||
+                          (data.password===null ||
+                            data.password.length<8 ||
+                            data.password!==data.password_confirmation
+                          )||
+                          data.password_confirmation===null||
+                          data.role.value===0
+                        }
+                      />
                     </div>
                   </form>
                 </div>
