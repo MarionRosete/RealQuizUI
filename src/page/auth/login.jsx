@@ -4,11 +4,14 @@ import Button from '../../component/elements/button';
 import Input from '../../component/elements/input';
 import Label from '../../component/elements/label';
 import PropTypes from 'prop-types';
+import {
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 
 
 const Login = ({isOpen, closeModal}) => {
   const [data, setData] = useState({
-    username: null,
+    email: null,
     password: null,
   });
   return (
@@ -55,14 +58,19 @@ const Login = ({isOpen, closeModal}) => {
               align-middle
               shadow-xl
               transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg
-                font-medium
-                leading-6
-                text-gray-900"
+                <div className='flex justify-end'>
+                  <div className='h-4 w-4 cursor-pointer' onClick={closeModal}>
+                    <XMarkIcon />
+                  </div>
+                </div>
+                <Dialog.Title className="text-lg
+                  font-medium
+                  font-bold
+                  leading-10
+                  text-gray-900
+                  text-purple-700"
                 >
-                Sign Up
+                 Sign Up
                 </Dialog.Title>
                 <div className="mt-7">
                   <form className="w-full max-w-sm">
@@ -77,7 +85,7 @@ const Login = ({isOpen, closeModal}) => {
                           onChange={(e)=>
                             setData(
                                 {...data,
-                                  username: e.target.value},
+                                  email: e.target.value},
                             )
                           }
                         />

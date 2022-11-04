@@ -81,6 +81,15 @@ const Register = ({isOpen, closeModal}) => {
                     <XMarkIcon />
                   </div>
                 </div>
+                <Dialog.Title className="text-lg
+                  font-medium
+                  font-bold
+                  leading-10
+                  text-gray-900
+                  text-purple-700"
+                >
+                  Sign In
+                </Dialog.Title>
                 <div className="mt-10">
                   <form className="w-full max-w-sm"
                     onSubmit={(e)=>{
@@ -90,10 +99,10 @@ const Register = ({isOpen, closeModal}) => {
                     }
                   >
                     <div className="md:flex md:items-center mb-6">
-                      <div className="md:w-1/3">
+                      <div className="hidden lg:block md:w-1/3">
                         <Label content={'Account'}/>
                       </div>
-                      <div className="md:w-2/3">
+                      <div className="md:w-2/3 flex justify-center lg:block">
                         <Select
                           Lists={Account}
                           selected={data.role}

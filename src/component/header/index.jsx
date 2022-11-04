@@ -54,10 +54,10 @@ const Header=({openModal}) =>{
               />
             </a>
             <div className='
-              text-purple-500
+              text-purple-700
               font-bold'
             >
-            Real Quiz
+            RealQuiz
             </div>
           </div>
           <div className="

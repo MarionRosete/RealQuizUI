@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Select=({Lists, setSelected, selected})=>{
   return (
-    <div className={`fixed top-16 w-44`}>
+    <div className={`w-44`}>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button

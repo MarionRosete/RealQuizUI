@@ -32,9 +32,12 @@ const Root = () => {
         '
       >
         <div className='content'>
+          <div className='text-7xl text-purple-700'>
+            RealQuiz
+          </div>
 
-          <div className='text-4xl'>
-            An Online quiz platform with Transparency
+          <div className='text-2xl mt-10'>
+            An Online quiz platform built with Transparency
           </div>
           <div className='mt-3'>
             We simply believe in fair and transparent quiz. That&apos;s All!
