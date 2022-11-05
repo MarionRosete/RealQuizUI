@@ -16,6 +16,7 @@ const Login = ({isOpen, closeModal}) => {
     email: null,
     password: null,
     loading: false,
+    forgotPassword: false,
   });
   const [error, setError] = useState(null);
 
@@ -23,6 +24,7 @@ const Login = ({isOpen, closeModal}) => {
     email: null,
     password: null,
     loading: false,
+    forgotPassword: false,
   };
   useEffect(()=>{
     if (!isOpen) {
@@ -149,9 +151,17 @@ const Login = ({isOpen, closeModal}) => {
                         loading={data.loading}
                       />
                     </div>
+                    <div className='flex
+                      justify-start
+                      text-sm
+                      text-blue-400
+                      cursor-pointer'
+                    onClick={()=>setData({...data, forgotPassword: true})}
+                    >
+                      Forgot password?
+                    </div>
                   </form>
                 </div>
-
               </Dialog.Panel>
             </Transition.Child>
           </div>

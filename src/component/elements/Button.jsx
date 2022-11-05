@@ -29,7 +29,7 @@ const Button = ({onClick, disabled, loading, content}) => {
         disabled:text-gray-400"
       onClick={onClick}
       disabled={disabled||loading}
-    >{true?
+    >{loading?
       <><Spinner /><span>Loading...</span></>:
       content
       }

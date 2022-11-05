@@ -35,6 +35,7 @@ const VerificationCodeSent=({isOpen, closeModal})=>{
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full
+                  dark:bg-zinc-800
                     max-w-md
                     transform
                     overflow-hidden
