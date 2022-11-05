@@ -1,8 +1,8 @@
 import React, {useState, Fragment} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import Button from '../../component/elements/button';
-import Input from '../../component/elements/input';
-import Label from '../../component/elements/label';
+import Button from '../../component/elements/Button';
+import Input from '../../component/elements/Input';
+import Label from '../../component/elements/Label';
 import PropTypes from 'prop-types';
 import {
   XMarkIcon,
@@ -15,12 +15,14 @@ const Login = ({isOpen, closeModal}) => {
   const [data, setData] = useState({
     email: null,
     password: null,
+    loading: false,
   });
   const [error, setError] = useState(null);
 
   const initState = {
     email: null,
     password: null,
+    loading: false,
   };
   useEffect(()=>{
     if (!isOpen) {
@@ -28,12 +30,14 @@ const Login = ({isOpen, closeModal}) => {
     }
   }, [isOpen]);
   const handleLogin = async ()=>{
+    setData({...data, loading: true});
     const request = await loginAPI(data);
     if (request.status===200) {
       localStorage.setItem('token', request.data.token);
     } else {
       setError(request.response.data.message);
     }
+    setData({...data, loading: false});
   };
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -69,6 +73,7 @@ const Login = ({isOpen, closeModal}) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full
+              dark:bg-zinc-800
               max-w-md
               transform
               overflow-hidden
@@ -140,6 +145,8 @@ const Login = ({isOpen, closeModal}) => {
                           (data.email===null||!validateEmail(data.email))||
                           (data.password===null||data.password==='')
                         }
+                        content={'Sign In'}
+                        loading={data.loading}
                       />
                     </div>
                   </form>

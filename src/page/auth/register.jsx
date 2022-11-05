@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import Label from '../../component/elements/label';
+import Label from '../../component/elements/Label';
 import Input from '../../component/elements/Input';
 import Button from '../../component/elements/Button';
 import PropTypes from 'prop-types';
@@ -23,6 +23,7 @@ const Register = ({isOpen, closeModal, verify}) => {
     password: null,
     password_confirmation: null,
     role: Account[0],
+    loading: false,
   });
   const [error, setError] = useState(null);
   const initState = {
@@ -31,6 +32,7 @@ const Register = ({isOpen, closeModal, verify}) => {
     password: null,
     password_confirmation: null,
     role: Account[0],
+    loading: false,
   };
   useEffect(()=>{
     //  CLEAR STATE
@@ -40,6 +42,7 @@ const Register = ({isOpen, closeModal, verify}) => {
   }, [isOpen]);
 
   const handleRegister = async ()=>{
+    setData({...data, loading: true});
     const request = await registerAPI({...data,
       role: data.role.name.toLocaleLowerCase(),
     });
@@ -53,6 +56,7 @@ const Register = ({isOpen, closeModal, verify}) => {
     } else {
       setError(request.response.data.message);
     }
+    setData({...data, loading: false});
   };
 
 
@@ -202,6 +206,8 @@ const Register = ({isOpen, closeModal, verify}) => {
                     </div>
                     <div className="mt-4">
                       <Button
+                        loading={data.loading}
+                        content={'Sign Up'}
                         onClick={handleRegister}
                         disabled={
                           (data.email===null||!validateEmail(data.email))||

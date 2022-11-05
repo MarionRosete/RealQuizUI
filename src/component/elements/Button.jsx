@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Spinner from '../loader/Spinner';
 
-const Button = ({onClick, disabled}) => {
+const Button = ({onClick, disabled, loading, content}) => {
   return (
     <button
       type="button"
@@ -23,11 +24,15 @@ const Button = ({onClick, disabled}) => {
         focus-visible:ring-2
         focus-visible:ring-blue-500
         focus-visible:ring-offset-2
-        disabled:bg-gray-300"
+        disabled:bg-inherit
+        disabled:hover:bg-gray-500
+        disabled:text-gray-400"
       onClick={onClick}
-      disabled={disabled}
-    >
-        Sign Up
+      disabled={disabled||loading}
+    >{true?
+      <><Spinner /><span>Loading...</span></>:
+      content
+      }
     </button>
   );
 };
@@ -35,6 +40,8 @@ const Button = ({onClick, disabled}) => {
 Button.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool,
+  content: PropTypes.string,
 };
 
 export default Button;

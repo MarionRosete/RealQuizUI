@@ -47,21 +47,24 @@ const VerificationCodeSent=({isOpen, closeModal})=>{
                     transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-xl font-bold leading-6 text-purple-700"
                   >
-                    Sign up successful
+                    Thanks for signing up
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                        You are one step towards taking/making exams.
-                        Please verify first your email address.
-                        We have sent you an email to verify the that it is you.
+                  <div className="mt-8">
+                    <p className="text-sm font-medium">
+                        You are one step towards taking/making exams
+                    </p>
+                  </div>
+                  <div className="mt-4">
+                    <p className="text-sm">
+                        Please verify your email address.
                         We verify email addresses so that you
                         can use forgot password later on.
                     </p>
                   </div>
 
-                  <div className="mt-4">
+                  <div className="mt-6">
                     <button
                       type="button"
                       className="inline-flex
