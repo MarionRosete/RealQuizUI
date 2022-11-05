@@ -16,7 +16,7 @@ const Account = [
   {value: 1, name: 'Student'},
   {value: 1, name: 'Teacher'},
 ];
-const Register = ({isOpen, closeModal}) => {
+const Register = ({isOpen, closeModal, verify}) => {
   const [data, setData] = useState({
     email: null,
     name: null,
@@ -46,7 +46,10 @@ const Register = ({isOpen, closeModal}) => {
 
     if (request.status===200) {
       localStorage.setItem('token', request.data.token);
-      setData({initState});
+      closeModal();
+      verify((oldState)=>({
+        ...oldState, verify: true,
+      }));
     } else {
       setError(request.response.data.message);
     }
@@ -226,5 +229,6 @@ const Register = ({isOpen, closeModal}) => {
 Register.propTypes = {
   isOpen: PropTypes.bool,
   closeModal: PropTypes.func,
+  verify: PropTypes.func,
 };
 export default Register;

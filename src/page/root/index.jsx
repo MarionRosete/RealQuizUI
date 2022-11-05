@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import Header from '../../component/header';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
+import VerificationCodeSent from '../auth/VerificationCodeSent';
 
 
 const Root = () => {
   const [isOpen, setIsOpen] = useState({
     login: false,
     register: false,
+    verify: false,
   });
 
   const closeRegister=()=>{
@@ -16,6 +18,10 @@ const Root = () => {
 
   const closeLogin=()=>{
     setIsOpen({...isOpen, login: false});
+  };
+
+  const closeVerify=()=>{
+    setIsOpen({...isOpen, verify: false});
   };
 
   return (
@@ -56,8 +62,12 @@ const Root = () => {
           </div>
         </div>
       </div>
-      <Register isOpen={isOpen.register} closeModal={closeRegister}/>
+      <Register
+        isOpen={isOpen.register}
+        closeModal={closeRegister}
+        verify={setIsOpen}/>
       <Login isOpen={isOpen.login} closeModal={closeLogin}/>
+      <VerificationCodeSent isOpen={isOpen.verify} closeModal={closeVerify}/>
     </div>
   );
 };
