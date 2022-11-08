@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Header from '../../component/header';
+import ForgotPassword from '../auth/ForgotPassword';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import VerificationCodeSent from '../auth/VerificationCodeSent';
@@ -10,6 +11,7 @@ const Root = () => {
     login: false,
     register: false,
     verify: false,
+    forgotPassword: false,
   });
 
   const closeRegister=()=>{
@@ -22,6 +24,10 @@ const Root = () => {
 
   const closeVerify=()=>{
     setIsOpen({...isOpen, verify: false});
+  };
+
+  const closeForgotPassword=()=>{
+    setIsOpen({...isOpen, forgotPassword: false});
   };
 
   return (
@@ -66,8 +72,19 @@ const Root = () => {
         isOpen={isOpen.register}
         closeModal={closeRegister}
         verify={setIsOpen}/>
-      <Login isOpen={isOpen.login} closeModal={closeLogin}/>
-      <VerificationCodeSent isOpen={isOpen.verify} closeModal={closeVerify}/>
+      <Login
+        isOpen={isOpen.login}
+        closeModal={closeLogin}
+        forgotPassword={setIsOpen}
+      />
+      <VerificationCodeSent
+        isOpen={isOpen.verify}
+        closeModal={closeVerify}
+      />
+      <ForgotPassword
+        isOpen={isOpen.forgotPassword}
+        closeModal={closeForgotPassword}
+      />
     </div>
   );
 };

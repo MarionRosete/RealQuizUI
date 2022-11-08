@@ -1,25 +1,21 @@
-import { Outlet, Router, ReactLocation,createHashHistory } from '@tanstack/react-location'
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import Root from './page/root'
-import { routes } from './routes'
-
+import React from 'react';
+import {Outlet, Router, ReactLocation} from '@tanstack/react-location';
+import {PrivateRoute, PublicRoute} from './routes';
 const App=()=> {
-  const location = new ReactLocation()
-  const isAuth = false
+  const location = new ReactLocation();
+  const token = localStorage.getItem('token');
+  if (window.location.pathname=== '/'&& token!==null ) {
+    window.location.href = '/dashboard';
+  }
   return (
-   <Router
-    location={location}
-    routes={routes}
-   >
-    {isAuth?
-        <Outlet/>:
-        <Root/>
-    }
-  
-   </Router>
-    
-  )
-}
+    <Router
+      location={location}
+      routes={token!==null?PrivateRoute:PublicRoute}
+    >
+      <Outlet/>
+    </Router>
 
-export default App
+  );
+};
+
+export default App;

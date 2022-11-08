@@ -31,3 +31,16 @@ export const registerAPI = async (payload)=>{
     return error;
   }
 };
+
+export const forgotPasswordAPI = async (payload) =>{
+  try {
+    const request = await apiService.post('/forgot_password', payload, {
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data',
+      'body': JSON.stringify(payload),
+    });
+    return request;
+  } catch (error) {
+    return error;
+  }
+};

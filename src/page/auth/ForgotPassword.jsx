@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, Fragment, useEffect} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
 import Button from '../../component/elements/Button';
 import Input from '../../component/elements/Input';
@@ -7,37 +7,47 @@ import PropTypes from 'prop-types';
 import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import {loginAPI} from '../../api/auth';
-import {useEffect} from 'react';
+import {forgotPasswordAPI} from '../../api/auth';
 import {validateEmail} from '../../helper/ValidateEmail';
 
-const Login = ({isOpen, closeModal, forgotPassword}) => {
+const ForgotPassword = ({isOpen, closeModal}) => {
   const [data, setData] = useState({
     email: null,
-    password: null,
+    errorMsg: null,
+    foundEmailMsg: null,
     loading: false,
   });
-  const [error, setError] = useState(null);
-
-  const initState = {
+  const initState ={
     email: null,
-    password: null,
+    errorMsg: null,
+    foundEmailMsg: null,
     loading: false,
   };
   useEffect(()=>{
     if (!isOpen) {
-      setData(initState); setError(null);
+      setData(initState);
     }
   }, [isOpen]);
+
   const handleLogin = async ()=>{
     setData({...data, loading: true});
-    const request = await loginAPI(data);
+    const request = await forgotPasswordAPI(data);
     if (request.status===200) {
-      localStorage.setItem('token', request.data.token);
+      setData(
+          {...data,
+            errorMsg: null,
+            foundEmailMsg: request.data.msg,
+            loading: false,
+          },
+      );
     } else {
-      setError(request.response.data.message);
+      setData(
+          {...data,
+            errorMsg: request.response.data.message,
+            loading: false,
+          },
+      );
     }
-    setData({...data, loading: false});
   };
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -96,71 +106,43 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
                   text-gray-900
                   text-purple-700"
                 >
-                 Sign In
+                 Forgot password
                 </Dialog.Title>
                 <div className="mt-10">
-                  {error !==null&&
+                  {data.errorMsg !==null&&
                     <div className='pb-4 text-red-700 text-sm'>
-                      {error}
+                      {data.errorMsg}
                     </div>
                   }
                   <form className="w-full max-w-sm">
-                    <div className="md:flex md:items-center mb-6">
-                      <div className="md:w-1/3">
-                        <Label content={'Email'}/>
-                      </div>
-                      <div className="md:w-2/3">
-                        <Input
-                          type={'text'}
-                          placeholder={'Email'}
-                          onChange={(e)=>
-                            setData(
-                                {...data,
-                                  email: e.target.value},
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="md:flex md:items-center mb-6">
-                      <div className="md:w-1/3">
-                        <Label content={'Password'}/>
-                      </div>
-                      <div className="md:w-2/3">
-                        <Input
-                          type={'password'}
-                          placeholder={'*************'}
-                          onChange={(e)=>
-                            setData(
-                                {...data,
-                                  password: e.target.value},
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
+                    {data.foundEmailMsg===null?
+                        <div className="md:flex md:items-center mb-6">
+                          <div className="md:w-1/3">
+                            <Label content={'Email'}/>
+                          </div>
+                          <div className="md:w-2/3">
+                            <Input
+                              type={'text'}
+                              placeholder={'Email'}
+                              onChange={(e)=>
+                                setData(
+                                    {...data,
+                                      email: e.target.value},
+                                )
+                              }
+                            />
+                          </div>
+                        </div>:
+                        data.foundEmailMsg
+                    }
                     <div className="mt-4">
                       <Button onClick={handleLogin}
                         disabled={
-                          (data.email===null||!validateEmail(data.email))||
-                          (data.password===null||data.password==='')
+                          data.email===null||!validateEmail(data.email)
                         }
-                        content={'Sign In'}
+                        content={'Search'}
                         loading={data.loading}
                       />
-                    </div>
-                    <div className='flex
-                      justify-start
-                      text-sm
-                      text-blue-400
-                      cursor-pointer'
-                    onClick={()=>
-                      forgotPassword((oldState)=>(
-                        {...oldState, forgotPassword: true}),
-                      )
-                    }
-                    >
-                      Forgot password?
                     </div>
                   </form>
                 </div>
@@ -172,9 +154,10 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
     </Transition>
   );
 };
-Login.propTypes = {
-  isOpen: PropTypes.bool,
+
+ForgotPassword.propTypes = {
   closeModal: PropTypes.func,
-  forgotPassword: PropTypes.func,
+  isOpen: PropTypes.bool,
 };
-export default Login;
+
+export default ForgotPassword;
