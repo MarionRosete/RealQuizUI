@@ -14,6 +14,9 @@ apiService.interceptors.response.use(
       return response;
     },
     function(error) {
+      if ( 403===error.response.status ) {
+        window.location.href= '/unverified-email';
+      }
       if (401 === error.response.status) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');

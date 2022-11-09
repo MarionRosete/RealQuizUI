@@ -1,11 +1,10 @@
 import React from 'react';
-import {getQandA} from '../../queryhooks';
+// import {getQandA} from '../../queryhooks';
 
 const Dashboard = () => {
-  const {data}=getQandA();
-  console.log(data);
+  // const {data}=getQandA();
   return (
-    <div>index</div>
+    <div>DASHBOARD </div>
   );
 };
 
