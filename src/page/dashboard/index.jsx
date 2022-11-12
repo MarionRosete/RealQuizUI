@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { useEffect } from 'react';
 // import {getQandA} from '../../queryhooks';
+import {GlobalStateContext} from '../../globalstate/index.jsx';
+
 
 const Dashboard = () => {
-  // const {data}=getQandA();
+  const {userAuth}=useContext(GlobalStateContext);
+  console.log(userAuth);
   return (
     <div>DASHBOARD </div>
   );

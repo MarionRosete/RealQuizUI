@@ -44,3 +44,22 @@ export const forgotPasswordAPI = async (payload) =>{
     return error;
   }
 };
+
+export const getAuthUser = async () => {
+  try {
+    const request = await apiService.get('/get-auth-user');
+    return request.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const resendEmailVerification = async () =>{
+  try {
+    const request = await apiService.get('/email/verify/resend');
+    return request;
+  } catch (error) {
+    return error;
+  };
+};
+
