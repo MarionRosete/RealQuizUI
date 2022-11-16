@@ -10,26 +10,22 @@ import {
 import {forgotPasswordAPI} from '../../api/auth';
 import {validateEmail} from '../../helper/ValidateEmail';
 
+const initState ={
+  email: null,
+  errorMsg: null,
+  foundEmailMsg: null,
+  loading: false,
+};
+
 const ForgotPassword = ({isOpen, closeModal}) => {
-  const [data, setData] = useState({
-    email: null,
-    errorMsg: null,
-    foundEmailMsg: null,
-    loading: false,
-  });
-  const initState ={
-    email: null,
-    errorMsg: null,
-    foundEmailMsg: null,
-    loading: false,
-  };
+  const [data, setData] = useState(initState);
   useEffect(()=>{
     if (!isOpen) {
       setData(initState);
     }
   }, [isOpen]);
 
-  const handleLogin = async ()=>{
+  const handleRequest = async ()=>{
     setData({...data, loading: true});
     const request = await forgotPasswordAPI(data);
     if (request.status===200) {
@@ -136,7 +132,7 @@ const ForgotPassword = ({isOpen, closeModal}) => {
                         data.foundEmailMsg
                     }
                     <div className="mt-4">
-                      <Button onClick={handleLogin}
+                      <Button onClick={handleRequest}
                         disabled={
                           data.email===null||!validateEmail(data.email)
                         }

@@ -20,7 +20,7 @@ export const PrivateRoute = [
 
 export const PublicRoute = [
   {
-    path: '/changepassword',
+    path: '/changepassword/*',
     element: <ChangePassword/>,
   },
   {
