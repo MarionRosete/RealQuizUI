@@ -79,3 +79,22 @@ export const changePassword= async (payload) => {
   }
 };
 
+export const checkEmailTokenAPI = async ( )=>{
+  const urlParams = new URLSearchParams(window.location.search);
+  const token =urlParams.get('token');
+  const email = urlParams.get('email');
+
+  try {
+    const request = await apiService.get(
+        `/check-email-reset-password/${token}/${email}`,
+        {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+    );
+    return request;
+  } catch (error) {
+    return error;
+  };
+};
+

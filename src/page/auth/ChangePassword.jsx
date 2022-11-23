@@ -3,9 +3,14 @@ import {useState} from 'react';
 import {changePassword} from '../../api/auth';
 import Button from '../../component/elements/Button';
 import Input from '../../component/elements/Input';
+import PropTypes from 'prop-types';
+import {checkEmailToken} from '../../queryhooks';
 const initState = {status: null, msg: '', loading: false};
-const ChangePassword = () => {
+const ChangePassword = ({email}) => {
   const [response, setResponse] = useState(initState);
+
+  const {data, isFetching} = checkEmailToken();
+  !isFetching&&console.log(data);
   const handleRequest=async ()=>{
     setResponse({...response, loading: true});
     const res = await changePassword();
@@ -16,7 +21,6 @@ const ChangePassword = () => {
       });
     }
   };
-  console.log(response);
   return (
     <div className='w-screen h-screen flex justify-center items-center'>
       <div className='
@@ -52,6 +56,10 @@ const ChangePassword = () => {
       </div>
     </div>
   );
+};
+
+ChangePassword.propTypes={
+  email: PropTypes.string,
 };
 
 export default ChangePassword;

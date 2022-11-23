@@ -22,6 +22,11 @@ export const PublicRoute = [
   {
     path: '/changepassword/:token',
     element: <ChangePassword/>,
+    children: [
+      {
+        path: ':token',
+      },
+    ],
   },
   {
     path: '/',

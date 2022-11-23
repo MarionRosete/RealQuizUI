@@ -131,6 +131,7 @@ const ForgotPassword = ({isOpen, closeModal}) => {
                         </div>:
                         data.foundEmailMsg
                     }
+                    {data.foundEmailMsg!==null&&
                     <div className="mt-4">
                       <Button onClick={handleRequest}
                         disabled={
@@ -140,6 +141,7 @@ const ForgotPassword = ({isOpen, closeModal}) => {
                         loading={data.loading}
                       />
                     </div>
+                    }
                   </form>
                 </div>
               </Dialog.Panel>
