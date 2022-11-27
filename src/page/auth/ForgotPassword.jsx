@@ -34,6 +34,7 @@ const ForgotPassword = ({isOpen, closeModal}) => {
             errorMsg: null,
             foundEmailMsg: request.data.msg,
             loading: false,
+            email: null,
           },
       );
     } else {
@@ -110,7 +111,7 @@ const ForgotPassword = ({isOpen, closeModal}) => {
                       {data.errorMsg}
                     </div>
                   }
-                  <form className="w-full max-w-sm">
+                  <form className="w-full max-w-sm" onSubmit={handleRequest}>
                     {data.foundEmailMsg===null?
                         <div className="md:flex md:items-center mb-6">
                           <div className="md:w-1/3">
@@ -131,9 +132,9 @@ const ForgotPassword = ({isOpen, closeModal}) => {
                         </div>:
                         data.foundEmailMsg
                     }
-                    {data.foundEmailMsg!==null&&
                     <div className="mt-4">
-                      <Button onClick={handleRequest}
+                      <Button
+                        onClick={handleRequest}
                         disabled={
                           data.email===null||!validateEmail(data.email)
                         }
@@ -141,7 +142,6 @@ const ForgotPassword = ({isOpen, closeModal}) => {
                         loading={data.loading}
                       />
                     </div>
-                    }
                   </form>
                 </div>
               </Dialog.Panel>
