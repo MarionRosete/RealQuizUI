@@ -64,10 +64,8 @@ export const resendEmailVerification = async () =>{
 };
 
 export const changePassword= async (payload) => {
-  const url = document.location.pathname;
-  const token = url.substring(16);
   try {
-    const request = await apiService.post(`/change_forgotten_password/${token}`,
+    const request = await apiService.post(`/change_forgotten_password`,
         payload, {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data',

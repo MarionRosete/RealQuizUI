@@ -6,7 +6,7 @@ import Input from '../../component/elements/Input';
 import PropTypes from 'prop-types';
 import {checkEmailToken} from '../../queryhooks';
 const initResponse = {status: null, msg: null, loading: false};
-const initPasswords = {password: null, password_confirmation: null};
+const initPasswords = {password: '', password_confirmation: null};
 
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get('email');
@@ -27,21 +27,20 @@ const ChangePassword = () => {
   const handleRequest=async ()=>{
     setResponse({...response, loading: true});
     const payload={...password, email};
-    console.log(payload);
-    // const res = await changePassword();
-    // if (res.response.status===404) {
-    //   setResponse({...response,
-    //     msg: res.response.data.msg,
-    //     status: res.response.status,
-    //   });
-    // }
+    const res = await changePassword(payload);
+    if (res.response.status===404) {
+      setResponse({...response,
+        msg: res.response.data.msg,
+        status: res.response.status,
+      });
+    }
   };
   return (
     <div className='w-screen h-screen flex justify-center items-center'>
       <div className='
         md:w-1/4
-        m-5
-        p-5
+        m-8
+        p-8
         h-auto
         rounded-xl
         dark:bg-zinc-800
@@ -67,6 +66,11 @@ const ChangePassword = () => {
                 ({...oldState, password: e.target.value}),
               )}
             />
+            {password.password.length < 8 &&
+                <div className='text-xs'>
+                  Password must be 8 character length
+                </div>
+            }
             <Input
               placeholder={'Confirm password'}
               onChange={(e)=>setPassword((oldState)=>
@@ -80,7 +84,12 @@ const ChangePassword = () => {
           <Button
             content={'Reset password'}
             onClick={handleRequest}
-            loading={response.loading}/>
+            loading={response.loading}
+            disabled={
+              password.password.length < 8 ||
+              password.password !== password.password_confirmation
+            }
+          />
         </div>
       </div>
     </div>
