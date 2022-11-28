@@ -158,6 +158,7 @@ const Header=({openModal}) =>{
           divide-gray-50
           rounded-lg
           bg-white
+          dark:bg-zinc-800
           shadow-lg
           ring-1
           ring-black
@@ -178,6 +179,7 @@ const Header=({openModal}) =>{
                     justify-center
                     rounded-md
                     bg-white
+                    dark:bg-zinc-800
                     p-2
                     text-gray-400
                     hover:bg-gray-100
@@ -193,9 +195,9 @@ const Header=({openModal}) =>{
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {solutions.map((item) => (
+                  {solutions.map((item, key) => (
                     <a
-                      key={item.name}
+                      key={key}
                       href={item.href}
                       className="
                         -m-3 flex
@@ -210,6 +212,7 @@ const Header=({openModal}) =>{
                         aria-hidden="true"
                       />
                       <span className="ml-3
+                        dark:text-white
                         text-base
                         font-medium
                         text-gray-900">
@@ -225,6 +228,7 @@ const Header=({openModal}) =>{
                 <a href="#" className="text-base
                   font-medium
                   text-gray-900
+                  dark:text-white
                   hover:text-gray-700">
                   Pricing
                 </a>
@@ -232,6 +236,7 @@ const Header=({openModal}) =>{
                 <a href="#" className="text-base
                  font-medium
                  text-gray-900
+                 dark:text-white
                  hover:text-gray-700"
                 >
                   Docs
@@ -243,6 +248,7 @@ const Header=({openModal}) =>{
                     className="text-base
                      font-medium
                      text-gray-900
+                     dark:text-white
                      hover:text-gray-700"
                   >
                     {item.name}
@@ -254,14 +260,18 @@ const Header=({openModal}) =>{
                   text-center
                   text-base
                   font-medium
-                  text-gray-500">
-                  Existing customer?{' '}
-                  <a href='/login'
+                  text-gray-500
+                  dark:text-white">
+                  New user?{' '}
+                  <div
                     className="text-indigo-600
-                    hover:text-indigo-500"
+                    hover:text-indigo-500 cursor-pointer"
+                    onClick={()=>{
+                      openModal((old)=>({...old, login: true}));
+                    }}
                   >
                     Sign in
-                  </a>
+                  </div>
                 </p>
               </div>
             </div>
