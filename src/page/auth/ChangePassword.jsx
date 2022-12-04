@@ -24,16 +24,23 @@ const ChangePassword = () => {
     }
   }
 
-  const handleRequest=async ()=>{
+  const handleRequest = async ()=>{
     setResponse({...response, loading: true});
     const payload={...password, email};
     const res = await changePassword(payload);
-    if (res.response.status===404) {
+    if (res?.response?.status===404) {
       setResponse({...response,
         msg: res.response.data.msg,
         status: res.response.status,
       });
     }
+    setResponse(
+        {...response,
+          loading: false,
+          status: res.status,
+          msg: res.data.status,
+        });
+    setTimeout(()=> window.location.href = '/', 2000);
   };
   return (
     <div className='w-screen h-screen flex justify-center items-center'>

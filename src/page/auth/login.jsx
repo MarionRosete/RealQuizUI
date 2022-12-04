@@ -31,7 +31,8 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
   }, [isOpen]);
   const handleLogin = async ()=>{
     setData({...data, loading: true});
-    const request = await loginAPI(data);
+    const payload = {email: data.email, password: data.password};
+    const request = await loginAPI(payload);
     if (request.status===200) {
       localStorage.setItem('token', request.data.token);
     } else {

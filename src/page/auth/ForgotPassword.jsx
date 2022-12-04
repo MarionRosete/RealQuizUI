@@ -25,7 +25,8 @@ const ForgotPassword = ({isOpen, closeModal}) => {
     }
   }, [isOpen]);
 
-  const handleRequest = async ()=>{
+  const handleRequest = async (e)=>{
+    e.preventDefault();
     setData({...data, loading: true});
     const request = await forgotPasswordAPI(data);
     if (request.status===200) {
