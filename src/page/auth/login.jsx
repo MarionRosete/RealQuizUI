@@ -35,6 +35,7 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
     const request = await loginAPI(payload);
     if (request.status===200) {
       localStorage.setItem('token', request.data.token);
+      window.location.href = '/dashboard';
     } else {
       setError(request.response.data.message);
     }
