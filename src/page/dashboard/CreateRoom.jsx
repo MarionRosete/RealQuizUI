@@ -4,14 +4,23 @@ import Input from '../../component/elements/Input';
 import Button from '../../component/elements/Button';
 import {useState} from 'react';
 import TextArea from '../../component/elements/TextArea';
+import {useCreateTeacherQuiz} from '../../queryhooks/quiz';
+import {useContext} from 'react';
+import {GlobalStateContext} from '../../globalstate';
+
 
 const initDataState = {
-  room: null,
+  name: null,
   description: null,
 };
 
 const CreateRoom = () => {
+  const {userAuth}=useContext(GlobalStateContext);
   const [send, setSend] = useState(initDataState);
+  const {mutate: createQuiz, isLoading: Creating}=useCreateTeacherQuiz();
+  const handleCreateQuiz = () => {
+    createQuiz({...send, owner: userAuth.id});
+  };
   return (
     <div className="mt-10">
       {/* {error !==null&&
@@ -27,11 +36,11 @@ const CreateRoom = () => {
           <div className="md:w-2/3">
             <Input
               type={'text'}
-              placeholder={'Room'}
+              placeholder={'Name'}
               onChange={(e)=>
                 setSend(
                     {...send,
-                      room: e.target.value},
+                      name: e.target.value},
                 )
               }
             />
@@ -52,13 +61,16 @@ const CreateRoom = () => {
         </div>
         <div className="mt-4">
           <Button
-            // onClick={handleLogin}
-            // disabled={
-            //   (data.email===null||!validateEmail(data.email))||
-            //               (data.password===null||data.password==='')
-            // }
+            onClick={handleCreateQuiz}
+            disabled={
+              send.name===null||
+              send.description===null||
+              send.name.length>50||
+              send.description.length>50||
+              Creating
+            }
             content={'Create'}
-            // loading={data.loading}
+            loading={Creating}
           />
         </div>
       </form>

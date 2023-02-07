@@ -11,7 +11,7 @@ const initCreateRoomState = {
   modal: false,
 };
 const Dashboard = () => {
-  const {userAuth}=useContext(GlobalStateContext);
+  const {userAuth, teacherQuiz}=useContext(GlobalStateContext);
   const [createRoom, setCreateRoom] = useState(initCreateRoomState);
 
   const handleLogout = async () => {
@@ -26,6 +26,7 @@ const Dashboard = () => {
   const handleCloseCreateRoom = () => {
     setCreateRoom({...createRoom, modal: false});
   };
+  console.log(teacherQuiz);
   return (
     <div className='min-h-screen'>
 
