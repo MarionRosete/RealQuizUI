@@ -38,7 +38,7 @@ const Dashboard = () => {
     <div className='min-h-screen'>
 
       <div className='flex justify-between m-6'>
-      Hello {userAuth?.name}
+        <div>Hello, <span className='font-bold'>{userAuth?.name}</span></div>
         <Button
           content={'Logout'}
           onClick={handleLogout}
