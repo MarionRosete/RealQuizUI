@@ -4,15 +4,17 @@ import Button from '../../component/elements/Button.jsx';
 import Modal from '../../component/modal/index.jsx';
 // import {getQandA} from '../../queryhooks';
 import {GlobalStateContext} from '../../globalstate/index.jsx';
+import CreateQandA from './CreateQandA.jsx';
 import CreateRoom from './CreateRoom.jsx';
 // import Sidebar from '../sidebar/index.jsx';
 
 const initCreateRoomState = {
-  modal: false,
+  quiz: false,
+  qanda: false,
 };
 const Dashboard = () => {
   const {userAuth, teacherQuiz}=useContext(GlobalStateContext);
-  const [createRoom, setCreateRoom] = useState(initCreateRoomState);
+  const [modal, setModal] = useState(initCreateRoomState);
 
   const handleLogout = async () => {
     const request = await logoutAPI();
@@ -21,12 +23,17 @@ const Dashboard = () => {
     }
   };
   const handleOpenCreateRoom = () => {
-    setCreateRoom({...createRoom, modal: true});
+    setModal({...modal, quiz: true});
   };
   const handleCloseCreateRoom = () => {
-    setCreateRoom({...createRoom, modal: false});
+    setModal({...modal, quiz: false});
   };
-  console.log(teacherQuiz);
+  const handleOpenCreateQandA= () => {
+    setModal({...modal, qanda: true});
+  };
+  const handleCloseCreateQandA = () => {
+    setModal({...modal, qanda: false});
+  };
   return (
     <div className='min-h-screen'>
 
@@ -37,6 +44,13 @@ const Dashboard = () => {
           onClick={handleLogout}
         />
       </div>
+      <div className='flex justify-end m-6'>
+        <Button
+          content={'Create Quiz'}
+          onClick={handleOpenCreateRoom}
+        />
+      </div>
+      {teacherQuiz?.length ===0?
       <div className='flex justify-center items-center gap-x-2'>
         You have no classes yet.
         <button
@@ -45,12 +59,37 @@ const Dashboard = () => {
         >
           Create now
         </button>
+      </div> :
+      <div className='flex m-10 justify-center gap-x-5'>
+        {
+          teacherQuiz?.map((quiz, key)=>
+            <div key={key}
+              className='flex cursor-pointer'
+              onClick={handleOpenCreateQandA}>
+              <div className='bg-purple-700 p-6 rounded-md'>
+                <div className='text-xl font-bold'>
+                  {quiz.name}
+                </div>
+                <div className='pl-5'>
+                  {quiz.description}
+                </div>
+              </div>
+            </div>,
+          )
+        }
       </div>
+      }
       <Modal
-        isOpen={createRoom.modal}
+        isOpen={modal.quiz}
         closeModal={handleCloseCreateRoom}
         Contents={CreateRoom}
         title={'Create room'}
+      />
+      <Modal
+        isOpen={modal.qanda}
+        closeModal={handleCloseCreateQandA}
+        Contents={CreateQandA}
+        title={'Create Q and A'}
       />
     </div>
   );
