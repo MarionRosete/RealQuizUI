@@ -25,7 +25,7 @@ const Modal = ({Contents, isOpen, closeModal, title}) => {
         <div className="fixed inset-0 overflow-y-auto">
           <div className="
         flex
-        min-h-full
+        h-full
         items-center
         justify-center
         p-4
@@ -45,6 +45,7 @@ const Modal = ({Contents, isOpen, closeModal, title}) => {
             max-w-md
             transform
             overflow-hidden
+            max-h-full
             rounded-2xl
             bg-white
             p-6

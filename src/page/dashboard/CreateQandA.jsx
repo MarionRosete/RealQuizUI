@@ -34,15 +34,14 @@ const CreateQandA = () => {
   const handleAddItem = () => {
     setQandA([...qanda, initData]);
   };
-  console.log(qanda);
   return (
-    <div className='mt-10'>
+    <div className='mt-10 h-5/6'>
       <div className='mt-5 mb-5'>
         <button onClick={handleAddItem}>
           Add item
         </button>
       </div>
-      <div className='space-y-10'>
+      <div className='space-y-10 overflow-y-auto h-5/6'>
         {qanda.map((data, key)=>
           <div key={key} className='space-y-3'>
             <div className='flex gap-x-3 items-center'>
