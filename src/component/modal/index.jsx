@@ -45,7 +45,7 @@ const Modal = ({Contents, isOpen, closeModal, title}) => {
             max-w-md
             transform
             overflow-hidden
-            max-h-full
+            max-h-[90%]
             rounded-2xl
             bg-white
             p-6

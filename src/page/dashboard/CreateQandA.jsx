@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TextArea from '../../component/elements/TextArea';
 import RadioButton from '../../component/elements/RadioButton';
+import Button from '../../component/elements/Button';
 
 const initData= {
   question: '',
@@ -35,13 +36,13 @@ const CreateQandA = () => {
     setQandA([...qanda, initData]);
   };
   return (
-    <div className='mt-10 h-5/6'>
+    <div className='mt-10 '>
       <div className='mt-5 mb-5'>
         <button onClick={handleAddItem}>
           Add item
         </button>
       </div>
-      <div className='space-y-10 overflow-y-auto h-5/6'>
+      <div className='space-y-10 overflow-y-auto h-72'>
         {qanda.map((data, key)=>
           <div key={key} className='space-y-3'>
             <div className='flex gap-x-3 items-center'>
@@ -102,6 +103,11 @@ const CreateQandA = () => {
             </div>
           </div>,
         )}
+      </div>
+      <div className='mt-5'>
+        <Button
+          content={'Submit'}
+        />
       </div>
     </div>
   );
