@@ -13,7 +13,7 @@ const initCreateRoomState = {
   qanda: false,
 };
 const Dashboard = () => {
-  const {userAuth, teacherQuiz}=useContext(GlobalStateContext);
+  const {userAuth, teacherQuiz, setQuizData}=useContext(GlobalStateContext);
   const [modal, setModal] = useState(initCreateRoomState);
 
   const handleLogout = async () => {
@@ -28,8 +28,9 @@ const Dashboard = () => {
   const handleCloseCreateRoom = () => {
     setModal({...modal, quiz: false});
   };
-  const handleOpenCreateQandA= () => {
+  const handleOpenCreateQandA= (quiz) => {
     setModal({...modal, qanda: true});
+    setQuizData(quiz);
   };
   const handleCloseCreateQandA = () => {
     setModal({...modal, qanda: false});
@@ -65,7 +66,7 @@ const Dashboard = () => {
           teacherQuiz?.map((quiz, key)=>
             <div key={key}
               className='flex cursor-pointer'
-              onClick={handleOpenCreateQandA}>
+              onClick={()=>handleOpenCreateQandA(quiz)}>
               <div className='bg-purple-700 p-6 rounded-md'>
                 <div className='text-xl font-bold'>
                   {quiz.name}

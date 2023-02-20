@@ -8,6 +8,7 @@ export const GlobalStateContext = createContext({});
 
 export const GlobalStateProvider = (props) =>{
   const [userAuth, setUserAuth] = useState();
+  const [quizData, setQuizData] = useState(null);
   const {data: teacherQuiz}=useGetTeacherQuiz();
 
   const getAuth = async ()=>{
@@ -23,6 +24,8 @@ export const GlobalStateProvider = (props) =>{
       value={{
         userAuth,
         teacherQuiz,
+        setQuizData,
+        quizData,
       }}
     >
       {props.children}

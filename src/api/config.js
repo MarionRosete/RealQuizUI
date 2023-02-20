@@ -14,15 +14,17 @@ apiService.interceptors.response.use(
       return response;
     },
     function(error) {
-      if ( 403===error.response.status ) {
+      if ( 403===error?.response?.status ) {
         window.location.href= '/unverified-email';
       }
-      if (401 === error.response.status) {
+      if (401 === error?.response?.status) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         if (window.location.pathname !== '/') {
           window.location.href = '/';
         }
+      } if (error.message==='Network Error') {
+        window.location.href = 'error';
       } else {
         return Promise.reject(error);
       }

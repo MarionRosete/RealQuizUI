@@ -5,6 +5,7 @@ import Root from '../page/root';
 import PageNotFound from '../page/404';
 import UnVerifiedEmail from '../page/Unverified';
 import {GlobalStateProvider} from '../globalstate';
+import ErrorPage from '../page/error';
 
 
 export const PrivateRoute = [
@@ -15,6 +16,14 @@ export const PrivateRoute = [
   {
     path: 'unverified-email',
     element: <UnVerifiedEmail/>,
+  },
+  {
+    path: '/error',
+    element: <ErrorPage/>,
+  },
+  {
+    path: '/*',
+    element: <PageNotFound/>,
   },
 ];
 
@@ -35,6 +44,10 @@ export const PublicRoute = [
   {
     path: '/*',
     element: <PageNotFound/>,
+  },
+  {
+    path: '/error',
+    element: <ErrorPage/>,
   },
 ];
 

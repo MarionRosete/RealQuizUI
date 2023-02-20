@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import TextArea from '../../component/elements/TextArea';
 import RadioButton from '../../component/elements/RadioButton';
 import Button from '../../component/elements/Button';
+import {GlobalStateContext} from '../../globalstate';
+import {useAddQandA} from '../../queryhooks/qanda';
 
 const initData= {
   question: '',
-  choiceA: null,
-  choiceB: null,
-  choiceC: null,
-  choiceD: null,
+  choice1: null,
+  choice2: null,
+  choice3: null,
+  choice4: null,
   answer: null,
 };
 const CreateQandA = () => {
   const [qanda, setQandA] = useState([initData]);
+  const {quizData} = useContext(GlobalStateContext);
+  const {mutate}= useAddQandA();
 
   const handleQuestion = (e, key) => {
     const arr = [...qanda];
@@ -28,12 +32,15 @@ const CreateQandA = () => {
 
   const handleChoice = (e, key, choice) => {
     const arr = [...qanda];
-    arr[key] = {...qanda[key], [choice]: e.target.value};
+    arr[key] = {...qanda[key], [choice]: e.target.value, code: quizData.id};
     setQandA(arr);
   };
 
   const handleAddItem = () => {
     setQandA([...qanda, initData]);
+  };
+  const handleSubmitQuiz = () => {
+    mutate(qanda);
   };
   return (
     <div className='mt-10 '>
@@ -62,7 +69,7 @@ const CreateQandA = () => {
               <TextArea
                 placeholder={'Choice A'}
                 rows={'1'}
-                onChange={(e)=>handleChoice(e, key, 'choiceA')}
+                onChange={(e)=>handleChoice(e, key, 'choice1')}
               />
             </div>
             <div className='flex gap-x-3 items-center'>
@@ -74,7 +81,7 @@ const CreateQandA = () => {
               <TextArea
                 placeholder={'Choice B'}
                 rows={'1'}
-                onChange={(e)=>handleChoice(e, key, 'choiceB')}
+                onChange={(e)=>handleChoice(e, key, 'choice2')}
               />
             </div>
             <div className='flex gap-x-3 items-center'>
@@ -86,7 +93,7 @@ const CreateQandA = () => {
               <TextArea
                 placeholder={'Choice 3'}
                 rows={'1'}
-                onChange={(e)=>handleChoice(e, key, 'choiceC')}
+                onChange={(e)=>handleChoice(e, key, 'choice3')}
               />
             </div>
             <div className='flex gap-x-3 items-center'>
@@ -98,7 +105,7 @@ const CreateQandA = () => {
               <TextArea
                 placeholder={'Choice 4'}
                 rows={'1'}
-                onChange={(e)=>handleChoice(e, key, 'choiceD')}
+                onChange={(e)=>handleChoice(e, key, 'choice4')}
               />
             </div>
           </div>,
@@ -107,6 +114,7 @@ const CreateQandA = () => {
       <div className='mt-5'>
         <Button
           content={'Submit'}
+          onClick={handleSubmitQuiz}
         />
       </div>
     </div>
