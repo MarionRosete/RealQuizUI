@@ -1,19 +1,33 @@
 import React, {useState, useContext} from 'react';
 import {logoutAPI} from '../../api/auth/index.js';
+import {getQandAAPI} from '../../api/qanda/index.js';
 import Button from '../../component/elements/Button.jsx';
 import Modal from '../../component/modal/index.jsx';
-// import {getQandA} from '../../queryhooks';
 import {GlobalStateContext} from '../../globalstate/index.jsx';
-import CreateQandA from './CreateQandA.jsx';
+import QandAContents from './QandAContents.jsx';
 import CreateRoom from './CreateRoom.jsx';
 // import Sidebar from '../sidebar/index.jsx';
 
 const initCreateRoomState = {
   quiz: false,
-  qanda: false,
+  QandA: false,
 };
+
+const emptyQandA= {
+  question: '',
+  choice1: null,
+  choice2: null,
+  choice3: null,
+  choice4: null,
+  answer: null,
+};
+
 const Dashboard = () => {
-  const {userAuth, teacherQuiz, setQuizData}=useContext(GlobalStateContext);
+  const {
+    userAuth,
+    teacherQuiz,
+    setQuizData,
+    setQandA}=useContext(GlobalStateContext);
   const [modal, setModal] = useState(initCreateRoomState);
 
   const handleLogout = async () => {
@@ -28,12 +42,14 @@ const Dashboard = () => {
   const handleCloseCreateRoom = () => {
     setModal({...modal, quiz: false});
   };
-  const handleOpenCreateQandA= (quiz) => {
-    setModal({...modal, qanda: true});
+  const handleOpenCreateQandA= async (quiz) => {
     setQuizData(quiz);
+    const qanda = await getQandAAPI(quiz.id);
+    setQandA(qanda.data.length>0?qanda.data:[emptyQandA]);
+    setModal({...modal, QandA: true});
   };
   const handleCloseCreateQandA = () => {
-    setModal({...modal, qanda: false});
+    setModal({...modal, QandA: false});
   };
   return (
     <div className='min-h-screen'>
@@ -87,10 +103,10 @@ const Dashboard = () => {
         title={'Create room'}
       />
       <Modal
-        isOpen={modal.qanda}
+        isOpen={modal.QandA}
         closeModal={handleCloseCreateQandA}
-        Contents={CreateQandA}
-        title={'Create Q and A'}
+        Contents={QandAContents}
+        title={'Q and A '}
       />
     </div>
   );

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({placeholder, rows, onChange}) => {
+const TextArea = ({placeholder, rows, onChange, value}) => {
   return (
     <textarea
       rows={rows}
+      value={value}
       className="block
         p-2.5
         w-full
@@ -31,6 +32,7 @@ const TextArea = ({placeholder, rows, onChange}) => {
 };
 
 TextArea.propTypes = {
+  value: PropTypes.any,
   rows: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,

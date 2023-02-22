@@ -13,9 +13,10 @@ const initData= {
   choice4: null,
   answer: null,
 };
-const CreateQandA = () => {
-  const [qanda, setQandA] = useState([initData]);
-  const {quizData} = useContext(GlobalStateContext);
+const QandAContents = () => {
+  const {quizData, QandA} = useContext(GlobalStateContext);
+  const [qanda, setQandA] = useState([...QandA]);
+  console.log(qanda);
   const {mutate}= useAddQandA();
 
   const handleQuestion = (e, key) => {
@@ -49,12 +50,13 @@ const CreateQandA = () => {
           Add item
         </button>
       </div>
-      <div className='space-y-10 overflow-y-auto h-72'>
+      <div className='space-y-10 overflow-y-auto h-72 snap-mandatory snap-y'>
         {qanda.map((data, key)=>
-          <div key={key} className='space-y-3'>
+          <div key={key} className='space-y-3 snap-center'>
             <div className='flex gap-x-3 items-center'>
               {key+1}.
               <TextArea
+                value={data.question?data.question:''}
                 placeholder={'Question'}
                 rows={'2'}
                 onChange={(e)=>handleQuestion(e, key)}
@@ -63,10 +65,12 @@ const CreateQandA = () => {
             <div className='flex gap-x-3 items-center'>
               <RadioButton
                 value={1}
+                checked={data.answer===1?true:null}
                 onChange={(e)=>handleAnswer(e, key)}
                 name={key}
               />
               <TextArea
+                value={data.choice1?data.choice1:''}
                 placeholder={'Choice A'}
                 rows={'1'}
                 onChange={(e)=>handleChoice(e, key, 'choice1')}
@@ -75,10 +79,12 @@ const CreateQandA = () => {
             <div className='flex gap-x-3 items-center'>
               <RadioButton
                 value={2}
+                checked={data.answer===2?true:null}
                 onChange={(e)=>handleAnswer(e, key)}
                 name={key}
               />
               <TextArea
+                value={data.choice2?data.choice2:''}
                 placeholder={'Choice B'}
                 rows={'1'}
                 onChange={(e)=>handleChoice(e, key, 'choice2')}
@@ -87,10 +93,12 @@ const CreateQandA = () => {
             <div className='flex gap-x-3 items-center'>
               <RadioButton
                 value={3}
+                checked={data.answer===3?true:null}
                 onChange={(e)=>handleAnswer(e, key)}
                 name={key}
               />
               <TextArea
+                value={data.choice3?data.choice3:''}
                 placeholder={'Choice 3'}
                 rows={'1'}
                 onChange={(e)=>handleChoice(e, key, 'choice3')}
@@ -99,10 +107,12 @@ const CreateQandA = () => {
             <div className='flex gap-x-3 items-center'>
               <RadioButton
                 value={4}
+                checked={data.answer===4?true:null}
                 onChange={(e)=>handleAnswer(e, key)}
                 name={key}
               />
               <TextArea
+                value={data.choice4?data.choice4:''}
                 placeholder={'Choice 4'}
                 rows={'1'}
                 onChange={(e)=>handleChoice(e, key, 'choice4')}
@@ -121,4 +131,4 @@ const CreateQandA = () => {
   );
 };
 
-export default CreateQandA;
+export default QandAContents;

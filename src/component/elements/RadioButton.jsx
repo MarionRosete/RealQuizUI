@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-const RadioButton = ({value, onChange, name}) => {
+const RadioButton = ({value, onChange, name, checked}) => {
   return (
     <input
       type="radio"
+      checked={checked}
       value={value}
       onChange={onChange}
       name={name}
@@ -26,5 +27,6 @@ RadioButton.propTypes = {
   value: PropTypes.number,
   onChange: PropTypes.func,
   name: PropTypes.number,
+  checked: PropTypes.bool,
 };
 export default RadioButton;
