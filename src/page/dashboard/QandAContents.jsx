@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import TextArea from '../../component/elements/TextArea';
 import RadioButton from '../../component/elements/RadioButton';
 import Button from '../../component/elements/Button';
-import {GlobalStateContext} from '../../globalstate';
+import {TeacherStateContext} from '../../globalstate';
 import {useAddQandA} from '../../queryhooks/qanda';
 
 const initData= {
@@ -15,7 +15,7 @@ const initData= {
   answer: null,
 };
 const QandAContents = () => {
-  const {quizData, QandA} = useContext(GlobalStateContext);
+  const {quizData, QandA} = useContext(TeacherStateContext);
   const [qanda, setQandA] = useState([...QandA]);
   console.log(qanda);
   const {mutate}= useAddQandA();

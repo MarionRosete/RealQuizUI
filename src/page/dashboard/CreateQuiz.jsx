@@ -6,7 +6,7 @@ import {useState} from 'react';
 import TextArea from '../../component/elements/TextArea';
 import {useCreateTeacherQuiz} from '../../queryhooks/quiz';
 import {useContext} from 'react';
-import {GlobalStateContext} from '../../globalstate';
+import {TeacherStateContext} from '../../globalstate';
 
 
 const initDataState = {
@@ -15,7 +15,7 @@ const initDataState = {
 };
 
 const CreateQuiz = () => {
-  const {userAuth}=useContext(GlobalStateContext);
+  const {userAuth}=useContext(TeacherStateContext);
   const [send, setSend] = useState(initDataState);
   const {mutate: createQuiz, isLoading: Creating}=useCreateTeacherQuiz();
   const handleCreateQuiz = () => {

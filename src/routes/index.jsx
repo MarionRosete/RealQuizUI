@@ -4,14 +4,14 @@ import ChangePassword from '../page/auth/ChangePassword';
 import Root from '../page/root';
 import PageNotFound from '../page/404';
 import UnVerifiedEmail from '../page/Unverified';
-import {GlobalStateProvider} from '../globalstate';
+import {TeacherStateProvider} from '../globalstate';
 import ErrorPage from '../page/error';
 
 
 export const PrivateRoute = [
   {
     path: '/dashboard',
-    element: <GlobalStateProvider><Dashboard/></GlobalStateProvider>,
+    element: <TeacherStateProvider><Dashboard/></TeacherStateProvider>,
   },
   {
     path: 'unverified-email',

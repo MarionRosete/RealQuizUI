@@ -3,7 +3,7 @@ import {logoutAPI} from '../../api/auth/index.js';
 import {getQandAAPI} from '../../api/qanda/index.js';
 import Button from '../../component/elements/Button.jsx';
 import Modal from '../../component/modal/index.jsx';
-import {GlobalStateContext} from '../../globalstate/index.jsx';
+import {TeacherStateContext} from '../../globalstate/index.jsx';
 import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
 // import Sidebar from '../sidebar/index.jsx';
@@ -28,7 +28,7 @@ const Dashboard = () => {
     userAuth,
     teacherQuiz,
     setQuizData,
-    setQandA}=useContext(GlobalStateContext);
+    setQandA}=useContext(TeacherStateContext);
   const [modal, setModal] = useState(initCreateRoomState);
 
   const handleLogout = async () => {

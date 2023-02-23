@@ -4,9 +4,9 @@ import {getAuthUser} from '../api/auth';
 import {useGetTeacherQuiz} from '../queryhooks/quiz';
 
 
-export const GlobalStateContext = createContext({});
+export const TeacherStateContext = createContext({});
 
-export const GlobalStateProvider = (props) =>{
+export const TeacherStateProvider = (props) =>{
   const [userAuth, setUserAuth] = useState();
   const [quizData, setQuizData] = useState(null);
   const [QandA, setQandA] = useState([]);
@@ -21,7 +21,7 @@ export const GlobalStateProvider = (props) =>{
     getAuth();
   }, []);
   return (
-    <GlobalStateContext.Provider
+    <TeacherStateContext.Provider
       value={{
         userAuth,
         teacherQuiz,
@@ -32,6 +32,6 @@ export const GlobalStateProvider = (props) =>{
       }}
     >
       {props.children}
-    </GlobalStateContext.Provider>
+    </TeacherStateContext.Provider>
   );
 };
