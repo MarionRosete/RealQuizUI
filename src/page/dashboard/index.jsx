@@ -5,7 +5,7 @@ import Button from '../../component/elements/Button.jsx';
 import Modal from '../../component/modal/index.jsx';
 import {GlobalStateContext} from '../../globalstate/index.jsx';
 import QandAContents from './QandAContents.jsx';
-import CreateRoom from './CreateRoom.jsx';
+import CreateQuiz from './CreateQuiz.jsx';
 // import Sidebar from '../sidebar/index.jsx';
 
 const initCreateRoomState = {
@@ -100,7 +100,7 @@ const Dashboard = () => {
       <Modal
         isOpen={modal.quiz}
         closeModal={handleCloseCreateRoom}
-        Contents={CreateRoom}
+        Contents={CreateQuiz}
         title={'Create room'}
       />
       <Modal
