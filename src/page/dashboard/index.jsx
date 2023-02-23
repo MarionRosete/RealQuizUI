@@ -14,6 +14,7 @@ const initCreateRoomState = {
 };
 
 const emptyQandA= {
+  id: null,
   question: '',
   choice1: null,
   choice2: null,

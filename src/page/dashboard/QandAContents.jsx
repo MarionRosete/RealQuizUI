@@ -6,6 +6,7 @@ import {GlobalStateContext} from '../../globalstate';
 import {useAddQandA} from '../../queryhooks/qanda';
 
 const initData= {
+  id: null,
   question: '',
   choice1: null,
   choice2: null,
