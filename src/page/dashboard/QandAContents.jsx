@@ -15,34 +15,34 @@ const initData= {
   answer: null,
 };
 const QandAContents = () => {
-  const {quizData, QandA} = useContext(TeacherStateContext);
-  const [qanda, setQandA] = useState([...QandA]);
-  console.log(qanda);
+  const {quiz, QandA} = useContext(TeacherStateContext);
+  const [editQandA, setQandA] = useState([...QandA]);
+  console.log(editQandA);
   const {mutate}= useAddQandA();
 
   const handleQuestion = (e, key) => {
-    const arr = [...qanda];
-    arr[key] = {...qanda[key], question: e.target.value};
+    const arr = [...editQandA];
+    arr[key] = {...editQandA[key], question: e.target.value};
     setQandA(arr);
   };
 
   const handleAnswer = (e, key) => {
-    const arr = [...qanda];
-    arr[key] = {...qanda[key], answer: e.target.value};
+    const arr = [...editQandA];
+    arr[key] = {...editQandA[key], answer: e.target.value};
     setQandA(arr);
   };
 
   const handleChoice = (e, key, choice) => {
-    const arr = [...qanda];
-    arr[key] = {...qanda[key], [choice]: e.target.value, code: quizData.id};
+    const arr = [...editQandA];
+    arr[key] = {...editQandA[key], [choice]: e.target.value, code: quiz.id};
     setQandA(arr);
   };
 
   const handleAddItem = () => {
-    setQandA([...qanda, initData]);
+    setQandA([...editQandA, initData]);
   };
   const handleSubmitQuiz = () => {
-    mutate(qanda);
+    mutate(editQandA);
   };
   return (
     <div className='mt-10 '>
@@ -52,7 +52,7 @@ const QandAContents = () => {
         </button>
       </div>
       <div className='space-y-10 overflow-y-auto h-72 snap-mandatory snap-y'>
-        {qanda.map((data, key)=>
+        {editQandA.map((data, key)=>
           <div key={key} className='space-y-3 snap-center'>
             <div className='flex gap-x-3 items-center'>
               {key+1}.

@@ -1,6 +1,4 @@
-import React, {useState, useContext} from 'react';
-import {logoutAPI} from '../../api/auth/index.js';
-import {getQandAAPI} from '../../api/qanda/index.js';
+import React, {useContext} from 'react';
 import Button from '../../component/elements/Button.jsx';
 import Modal from '../../component/modal/index.jsx';
 import {TeacherStateContext} from '../../globalstate/index.jsx';
@@ -8,50 +6,18 @@ import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
 // import Sidebar from '../sidebar/index.jsx';
 
-const initCreateRoomState = {
-  quiz: false,
-  QandA: false,
-};
-
-const emptyQandA= {
-  id: null,
-  question: '',
-  choice1: null,
-  choice2: null,
-  choice3: null,
-  choice4: null,
-  answer: null,
-};
 
 const Dashboard = () => {
   const {
     userAuth,
     teacherQuiz,
-    setQuizData,
-    setQandA}=useContext(TeacherStateContext);
-  const [modal, setModal] = useState(initCreateRoomState);
-
-  const handleLogout = async () => {
-    const request = await logoutAPI();
-    if (request.status===200) {
-      window.location.href = '/';
-    }
-  };
-  const handleOpenCreateRoom = () => {
-    setModal({...modal, quiz: true});
-  };
-  const handleCloseCreateRoom = () => {
-    setModal({...modal, quiz: false});
-  };
-  const handleOpenCreateQandA= async (quiz) => {
-    setQuizData(quiz);
-    const qanda = await getQandAAPI(quiz.id);
-    setQandA(qanda.data.length>0?qanda.data:[emptyQandA]);
-    setModal({...modal, QandA: true});
-  };
-  const handleCloseCreateQandA = () => {
-    setModal({...modal, QandA: false});
-  };
+    handleLogout,
+    modal,
+    handleOpenCreateRoom,
+    handleCloseCreateRoom,
+    handleOpenCreateQandA,
+    handleCloseCreateQandA,
+  }=useContext(TeacherStateContext);
   return (
     <div className='min-h-screen'>
 
