@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const Input = ({type, onChange, placeholder, max}) => {
+const Input = ({type, onChange, placeholder, max, autoComplete}) => {
   return (
     <input className="bg-gray-200
         dark:bg-slate-700
@@ -23,6 +23,7 @@ const Input = ({type, onChange, placeholder, max}) => {
     type={type}
     placeholder={placeholder}
     onChange={onChange}
+    autoComplete={autoComplete}
     maxLength={max}
     size={max}
     />
@@ -32,6 +33,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   type: PropTypes.string,
+  autoComplete: PropTypes.string,
   max: PropTypes.string,
 };
 

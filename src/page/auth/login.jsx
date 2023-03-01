@@ -114,6 +114,7 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
                       <div className="md:w-2/3">
                         <Input
                           type={'text'}
+                          autoComplete={'email'}
                           placeholder={'Email'}
                           onChange={(e)=>
                             setData(
@@ -131,6 +132,7 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
                       <div className="md:w-2/3">
                         <Input
                           type={'password'}
+                          autoComplete={'new-password'}
                           placeholder={'*************'}
                           onChange={(e)=>
                             setData(

@@ -153,6 +153,7 @@ const Register = ({isOpen, closeModal, verify}) => {
                       <div className="md:w-2/3">
                         <Input
                           type={'text'}
+                          autoComplete={'email'}
                           placeholder={'Email'}
                           onChange={(e)=>
                             setData({...data, email: e.target.value})
@@ -168,6 +169,7 @@ const Register = ({isOpen, closeModal, verify}) => {
                         <Input
                           max={'50'}
                           type={'text'}
+                          autoComplete={'name'}
                           placeholder={'Name'}
                           onChange={(e)=>
                             setData({...data, name: e.target.value})
@@ -182,6 +184,7 @@ const Register = ({isOpen, closeModal, verify}) => {
                       <div className="md:w-2/3">
                         <Input
                           type={'password'}
+                          autoComplete={'new-password'}
                           placeholder={'*************'}
                           onChange={(e)=>
                             setData({...data, password: e.target.value})
@@ -196,6 +199,7 @@ const Register = ({isOpen, closeModal, verify}) => {
                       <div className="md:w-2/3">
                         <Input
                           type={'password'}
+                          autoComplete={'new-password'}
                           placeholder={'*************'}
                           onChange={(e)=>
                             setData({...data, password_confirmation:
