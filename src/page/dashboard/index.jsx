@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import Button from '../../component/elements/Button.jsx';
 import Modal from '../../component/modal/index.jsx';
-import {TeacherStateContext} from '../../globalstate/index.jsx';
+import {TeacherStateContext} from '../../globalstate/TeacherContext';
 import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
 // import Sidebar from '../sidebar/index.jsx';

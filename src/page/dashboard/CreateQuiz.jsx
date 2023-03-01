@@ -6,7 +6,7 @@ import {useState} from 'react';
 import TextArea from '../../component/elements/TextArea';
 import {useCreateTeacherQuiz} from '../../queryhooks/quiz';
 import {useContext} from 'react';
-import {TeacherStateContext} from '../../globalstate';
+import {TeacherStateContext} from '../../globalstate/TeacherContext';
 
 
 const initDataState = {

@@ -4,7 +4,7 @@ import ChangePassword from '../page/auth/ChangePassword';
 import Root from '../page/root';
 import PageNotFound from '../page/404';
 import UnVerifiedEmail from '../page/Unverified';
-import {TeacherStateProvider} from '../globalstate';
+import {TeacherStateProvider} from '../globalstate/TeacherContext';
 import ErrorPage from '../page/error';
 
 

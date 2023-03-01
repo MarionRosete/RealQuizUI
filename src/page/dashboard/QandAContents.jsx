@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import TextArea from '../../component/elements/TextArea';
 import RadioButton from '../../component/elements/RadioButton';
 import Button from '../../component/elements/Button';
-import {TeacherStateContext} from '../../globalstate';
+import {TeacherStateContext} from '../../globalstate/TeacherContext';
 import {useAddQandA} from '../../queryhooks/qanda';
 
 const initData= {

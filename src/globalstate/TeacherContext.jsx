@@ -3,6 +3,7 @@ import React, {createContext, useEffect, useState} from 'react';
 import {getAuthUser} from '../api/auth';
 import {useGetTeacherQuiz} from '../queryhooks/quiz';
 import {getQandAAPI} from '../api/qanda';
+import {logoutAPI} from '../api/auth';
 
 
 export const TeacherStateContext = createContext({});
