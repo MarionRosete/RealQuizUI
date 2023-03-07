@@ -23,9 +23,8 @@ apiService.interceptors.response.use(
         if (window.location.pathname !== '/') {
           window.location.href = '/';
         }
-      } if (error.message==='Network Error') {
-        window.location.href = 'error';
       } else {
+        window.location.href = 'error';
         return Promise.reject(error);
       }
     },
