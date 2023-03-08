@@ -18,7 +18,7 @@ const IconButton = ({Icon, onClick}) => {
     hover:bg-zinc-600
     hover:border-zinc-600
   '>
-      <Icon/>
+      {Icon}
     </div>
   );
 };
