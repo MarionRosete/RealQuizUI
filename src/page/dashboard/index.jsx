@@ -50,11 +50,11 @@ const Dashboard = () => {
             <div key={key}
               className='flex cursor-pointer'
               onClick={()=>handleOpenCreateQandA(quiz)}>
-              <div className='bg-purple-700 p-6 rounded-md'>
-                <div className='text-xl font-bold'>
+              <div className='bg-violet-400 p-6 rounded-md'>
+                <div className='text-xl font-bold text-white'>
                   {quiz.name}
                 </div>
-                <div className='pl-5'>
+                <div className='pl-5 text-white'>
                   {quiz.description}
                 </div>
               </div>

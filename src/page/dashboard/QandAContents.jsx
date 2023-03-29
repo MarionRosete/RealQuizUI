@@ -17,7 +17,6 @@ const initData= {
 const QandAContents = () => {
   const {quiz, QandA} = useContext(TeacherStateContext);
   const [editQandA, setQandA] = useState([...QandA]);
-  console.log(editQandA);
   const {mutate}= useAddQandA();
 
   const handleQuestion = (e, key) => {
