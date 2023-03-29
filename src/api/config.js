@@ -24,7 +24,6 @@ apiService.interceptors.response.use(
           window.location.href = '/';
         }
       } else {
-        window.location.href = 'error';
         return Promise.reject(error);
       }
     },

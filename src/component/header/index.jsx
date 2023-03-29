@@ -10,10 +10,7 @@ import PropTypes from 'prop-types';
 
 const Header=({openModal}) =>{
   return (
-    <Popover className="
-      bg-white
-      dark:bg-zinc-800"
-    >
+    <Popover>
       <div className="
         px-6
         text-center"
