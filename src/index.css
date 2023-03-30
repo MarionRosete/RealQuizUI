@@ -87,8 +87,19 @@ button:focus-visible {
     background-color: #103780;
   }
   div[id*="headlessui-dialog-panel"]{
-    background-color: #0b1d42;
+    background-color: #1b2c47;
   }
+  input[type], textarea {
+    border-color: rgb(46, 99, 139);
+    background-color: transparent;
+    color: #ebeff1;
+  }
+  #textarea {
+    border-color: rgb(46, 99, 139);
+    background-color: transparent;
+    color: #ebeff1;
+  }
+  
   
   
 }
