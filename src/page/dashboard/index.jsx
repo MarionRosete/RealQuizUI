@@ -4,6 +4,7 @@ import Modal from '../../component/modal/index.jsx';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
 import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
+import {DarkMode} from '../../helper/DarkMode.js';
 // import Sidebar from '../sidebar/index.jsx';
 
 
@@ -50,11 +51,15 @@ const Dashboard = () => {
             <div key={key}
               className='flex cursor-pointer'
               onClick={()=>handleOpenCreateQandA(quiz)}>
-              <div className='bg-violet-400 p-6 rounded-md'>
-                <div className='text-xl font-bold text-white'>
+              <div className={`
+                shadow-lg 
+                shadow-${DarkMode?'cyan':'grey'}-500/50 
+                p-6 
+                rounded-md`}>
+                <div className='text-xl font-bold'>
                   {quiz.name}
                 </div>
-                <div className='pl-5 text-white'>
+                <div className='pl-5 '>
                   {quiz.description}
                 </div>
               </div>

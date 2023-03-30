@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 const Label = ({content}) => {
   return (
     <label className="block
-    text-gray-500
-    dark:text-white
     font-bold
     md:text-right
     mb-1
