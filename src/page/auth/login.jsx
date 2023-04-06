@@ -43,7 +43,10 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
   };
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div"
+        className="relative z-10"
+        onClose={closeModal}
+        id='modal'>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -75,18 +78,17 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full
-              dark:bg-zinc-800
               max-w-md
               transform
               overflow-hidden
               rounded-2xl
-              bg-white
               p-6
               text-center
               align-middle
               shadow-xl
-              transition-all">
-                <div className='flex justify-end'>
+              transition-all"
+              id='modal'>
+                <div className='flex justify-end' id='modal'>
                   <div className='h-4 w-4 cursor-pointer' onClick={closeModal}>
                     <XMarkIcon />
                   </div>

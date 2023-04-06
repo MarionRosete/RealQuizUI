@@ -61,13 +61,58 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #020304;
     background-color: #ffffff;
   }
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
+  div[id*="headlessui-dialog-panel"]{
+    background-color: #f3f4f6;
   }
+  button {
+    background-color: #f8f7f9;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #ebeff1;
+    background-color: #1e293b;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #103780;
+  }
+  div[id*="headlessui-dialog-panel"]{
+    background-color: #1b2c47;
+  }
+  input[type], textarea {
+    border-color: rgb(46, 99, 139);
+    background-color: transparent;
+    color: #ebeff1;
+  }
+  #textarea {
+    border-color: rgb(46, 99, 139);
+    background-color: transparent;
+    color: #ebeff1;
+  }
+  
+  button[id*='headlessui-listbox-button']{
+    background-color: #1b2c47;
+    border-color: rgb(46, 99, 139);
+  }
+
+  ul[id*='headlessui-listbox-options']{
+    background-color: #1b2c47;
+    
+  }
+  li[id*='headlessui-listbox-option']{
+    background-color: #1b2c47;
+    color:#ebeff1
+    
+  }
+  
 }

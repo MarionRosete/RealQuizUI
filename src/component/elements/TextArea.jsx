@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const TextArea = ({placeholder, rows, onChange, value}) => {
   return (
     <textarea
+      id="textarea"
       rows={rows}
       value={value}
       className="block
