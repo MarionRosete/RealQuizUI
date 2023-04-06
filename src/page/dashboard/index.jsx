@@ -53,7 +53,7 @@ const Dashboard = () => {
               onClick={()=>handleOpenCreateQandA(quiz)}>
               <div className={`
                 shadow-lg 
-                shadow-${DarkMode?'cyan':'grey'}-500/50 
+                ${DarkMode?'shadow-blue-500/50':'shadow-gray-500/50'}
                 p-6 
                 rounded-md`}>
                 <div className='text-xl font-bold'>
