@@ -50,15 +50,18 @@ const QandAContents = () => {
           Add item
         </button>
       </div>
-      <div className='space-y-10 overflow-y-auto h-72 snap-mandatory snap-y'>
+      <div
+        id='qanda'
+        className='space-y-10 overflow-y-auto h-80 snap-mandatory snap-y'
+      >
         {editQandA.map((data, key)=>
-          <div key={key} className='space-y-3 snap-center'>
+          <div key={key} className=' space-y-3 mr-2 ml-2 snap-center'>
             <div className='flex gap-x-3 items-center'>
               {key+1}.
               <TextArea
                 value={data.question?data.question:''}
                 placeholder={'Question'}
-                rows={'2'}
+                rows={'4'}
                 onChange={(e)=>handleQuestion(e, key)}
               />
             </div>

@@ -79,6 +79,7 @@ const Dashboard = () => {
         closeModal={handleCloseCreateQandA}
         Contents={QandAContents}
         title={'Q and A '}
+        maxHeight={`max-w-[40%]`}
       />
     </div>
   );

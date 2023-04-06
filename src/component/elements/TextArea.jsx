@@ -12,10 +12,9 @@ const TextArea = ({placeholder, rows, onChange, value}) => {
         w-full
         text-sm
         text-gray-900
-        bg-gray-50
         rounded-lg
         border
-        border-gray-300
+        border-gray-500
         focus:ring-blue-500
         focus:border-blue-500
         dark:bg-gray-700
