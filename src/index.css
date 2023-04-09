@@ -89,6 +89,11 @@ button:focus-visible {
     background: rgb(55 65 81); 
     border-radius: 10px;
   }
+
+  #popoverElement{
+    background-color: #ffffff;
+    color: #ffffff;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -144,6 +149,11 @@ button:focus-visible {
   div[id='qanda']::-webkit-scrollbar-thumb {
     background: rgb(46, 99, 139); 
     border-radius: 10px;
+  }
+
+  #popoverElement{
+    background-color: #1b2c47;
+    color: #1b2c47;
   }
   
 }

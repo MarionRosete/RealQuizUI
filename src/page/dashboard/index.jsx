@@ -5,6 +5,8 @@ import {TeacherStateContext} from '../../globalstate/TeacherContext';
 import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
 import {DarkMode} from '../../helper/DarkMode.js';
+import PopoverComponent from '../../component/popover/index.jsx';
+import {QandAPopoverContents} from '../../helper/quiz/index.jsx';
 // import Sidebar from '../sidebar/index.jsx';
 
 
@@ -16,7 +18,7 @@ const Dashboard = () => {
     modal,
     handleOpenCreateRoom,
     handleCloseCreateRoom,
-    handleOpenCreateQandA,
+    //  handleOpenCreateQandA,
     handleCloseCreateQandA,
   }=useContext(TeacherStateContext);
   return (
@@ -48,21 +50,27 @@ const Dashboard = () => {
       <div className='flex m-10 justify-center gap-x-5'>
         {
           teacherQuiz?.map((quiz, key)=>
-            <div key={key}
-              className='flex cursor-pointer'
-              onClick={()=>handleOpenCreateQandA(quiz)}>
-              <div className={`
-                shadow-lg 
-                ${DarkMode?'shadow-blue-500/50':'shadow-gray-500/50'}
-                p-6 
-                rounded-md`}>
-                <div className='text-xl font-bold'>
-                  {quiz.name}
-                </div>
-                <div className='pl-5 '>
-                  {quiz.description}
-                </div>
-              </div>
+            <div key={key}>
+              <PopoverComponent
+                ButtonToClick={
+                  <div className={`shadow-lg 
+                    ${DarkMode?'shadow-[#2E638B]':'shadow-gray-500/50'}
+                    p-6 
+                    rounded-md`
+                  }
+                  >
+                    <div className='text-xl font-bold'>
+                      {quiz.name}
+                    </div>
+                    <div className='pl-5 '>
+                      {quiz.description}
+                    </div>
+                  </div>
+                }
+                Content={
+                  QandAPopoverContents
+                }
+              />
             </div>,
           )
         }
