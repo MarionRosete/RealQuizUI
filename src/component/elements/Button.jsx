@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../loader/Spinner';
 
-const Button = ({onClick, disabled, loading, content}) => {
+const Button = ({onClick, disabled, loading, content, Icon}) => {
   return (
     <button
       type="button"
@@ -11,14 +11,13 @@ const Button = ({onClick, disabled, loading, content}) => {
         rounded-md
         border
         border-transparent
-        bg-purple-400
-        dark:bg-purple-700
+        bg-[#646cff]
         px-4
         py-2
         text-sm
         font-medium
         text-white
-        hover:bg-purple-500
+        hover:bg-[#535bf2]
         dark:hover:bg-purple-800
         focus:outline-none
         focus-visible:ring-2
@@ -31,7 +30,8 @@ const Button = ({onClick, disabled, loading, content}) => {
       disabled={disabled||loading}
     >{loading?
       <><Spinner /><span>Loading...</span></>:
-      content
+      <>{Icon}{content}</>
+
       }
     </button>
   );
@@ -42,6 +42,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   content: PropTypes.string,
+  Icon: PropTypes.any,
 };
 
 export default Button;
