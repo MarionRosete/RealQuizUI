@@ -4,7 +4,8 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 
-const PopoverComponent=({ButtonToClick, Content})=> {
+const PopoverComponent=({ButtonToClick, Content, data})=> {
+  console.log(data);
   return (
 
     <Popover className="relative">
@@ -52,13 +53,14 @@ const PopoverComponent=({ButtonToClick, Content})=> {
                   {Content.map((item) => (
                     <a
                       key={item.name}
-                      href={item.href}
+                      onClick={()=>item.onClick(data)}
                       className="-m-3
                       flex
                       items-center
                       rounded-lg
                       p-2
-                      transitio
+                      transition
+                      cursor-pointer
                       duration-150
                       ease-in-out
                       hover:bg-gray-5
@@ -107,5 +109,6 @@ const PopoverComponent=({ButtonToClick, Content})=> {
 PopoverComponent.propTypes = {
   ButtonToClick: PropTypes.any,
   Content: PropTypes.any,
+  data: PropTypes.any,
 };
 export default PopoverComponent;

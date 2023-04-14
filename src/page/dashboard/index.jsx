@@ -6,9 +6,8 @@ import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
 import {DarkMode} from '../../helper/DarkMode.js';
 import PopoverComponent from '../../component/popover/index.jsx';
-import {QandAPopoverContents} from '../../helper/quiz/index.jsx';
 // import Sidebar from '../sidebar/index.jsx';
-
+import {viewIcon, editIcon, deleteIcon} from '../../helper/quiz/index.jsx';
 
 const Dashboard = () => {
   const {
@@ -18,9 +17,30 @@ const Dashboard = () => {
     modal,
     handleOpenCreateRoom,
     handleCloseCreateRoom,
-    //  handleOpenCreateQandA,
+    handleOpenCreateQandA,
     handleCloseCreateQandA,
   }=useContext(TeacherStateContext);
+  const QandAPopoverContents = [
+    {
+      name: 'View',
+      description: 'View quiz questions and answers',
+      onClick: handleOpenCreateQandA,
+      icon: ()=>viewIcon(),
+
+    },
+    {
+      name: 'Edit',
+      description: 'Edit quiz name and description',
+      href: '##',
+      icon: ()=>editIcon(),
+    },
+    {
+      name: 'Delete',
+      description: 'Delete quiz and its questions and answers',
+      href: '##',
+      icon: ()=> deleteIcon(),
+    },
+  ];
   return (
     <div className='min-h-screen'>
 
@@ -70,6 +90,7 @@ const Dashboard = () => {
                 Content={
                   QandAPopoverContents
                 }
+                data={quiz}
               />
             </div>,
           )
