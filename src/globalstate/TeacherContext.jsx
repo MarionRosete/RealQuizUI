@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, {createContext, useEffect, useState} from 'react';
 import {getAuthUser} from '../api/auth';
-import {useGetTeacherQuiz} from '../queryhooks/quiz';
+import {useGetTeacherQuiz, useDeleteTeacherQuiz} from '../queryhooks/quiz';
 import {getQandAAPI} from '../api/qanda';
 import {logoutAPI} from '../api/auth';
 
@@ -28,6 +28,7 @@ export const TeacherStateProvider = (props) =>{
   const [quiz, setQuiz] = useState(null);
   const [QandA, setQandA] = useState(null);
   const {data: teacherQuiz}=useGetTeacherQuiz();
+  const {mutate} = useDeleteTeacherQuiz();
 
   const getAuth = async ()=>{
     const req= await getAuthUser();
@@ -61,6 +62,9 @@ export const TeacherStateProvider = (props) =>{
   const handleCloseCreateQandA = () => {
     setModal({...modal, QandA: false});
   };
+  const deleteQuiz = (quiz) => {
+    mutate(quiz.id);
+  };
   return (
     <TeacherStateContext.Provider
       value={{
@@ -76,6 +80,7 @@ export const TeacherStateProvider = (props) =>{
         handleCloseCreateRoom,
         handleOpenCreateQandA,
         handleCloseCreateQandA,
+        deleteQuiz,
       }}
     >
       {props.children}

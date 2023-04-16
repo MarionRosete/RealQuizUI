@@ -19,6 +19,7 @@ const Dashboard = () => {
     handleCloseCreateRoom,
     handleOpenCreateQandA,
     handleCloseCreateQandA,
+    deleteQuiz,
   }=useContext(TeacherStateContext);
   const QandAPopoverContents = [
     {
@@ -37,15 +38,14 @@ const Dashboard = () => {
     {
       name: 'Delete',
       description: 'Delete quiz and its questions and answers',
-      href: '##',
+      onClick: deleteQuiz,
       icon: ()=> deleteIcon(),
     },
   ];
   return (
     <div className='min-h-screen'>
-
       <div className='flex justify-between m-6'>
-        <div>Hello, <span className='font-bold'>{userAuth?.name}</span></div>
+        <div>Hello,  <span className='font-bold'>{userAuth?.name}</span></div>
         <Button
           content={'Logout'}
           onClick={handleLogout}

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 
 const PopoverComponent=({ButtonToClick, Content, data})=> {
-  console.log(data);
   return (
 
     <Popover className="relative">
