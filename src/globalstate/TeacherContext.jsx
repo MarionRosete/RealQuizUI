@@ -28,7 +28,7 @@ export const TeacherStateProvider = (props) =>{
   const [quiz, setQuiz] = useState(null);
   const [QandA, setQandA] = useState(null);
   const {data: teacherQuiz}=useGetTeacherQuiz();
-  const {mutate} = useDeleteTeacherQuiz();
+  const {mutate: deleteQuiz} = useDeleteTeacherQuiz();
 
   const getAuth = async ()=>{
     const req= await getAuthUser();
@@ -62,8 +62,8 @@ export const TeacherStateProvider = (props) =>{
   const handleCloseCreateQandA = () => {
     setModal({...modal, QandA: false});
   };
-  const deleteQuiz = (quiz) => {
-    mutate(quiz.id);
+  const handleDeleteQuiz = (quiz) => {
+    deleteQuiz(quiz.id);
   };
   return (
     <TeacherStateContext.Provider
@@ -80,7 +80,7 @@ export const TeacherStateProvider = (props) =>{
         handleCloseCreateRoom,
         handleOpenCreateQandA,
         handleCloseCreateQandA,
-        deleteQuiz,
+        handleDeleteQuiz,
       }}
     >
       {props.children}
