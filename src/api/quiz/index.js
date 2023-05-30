@@ -23,7 +23,7 @@ export const createQuizAPI = async (payload) => {
 
 export const deleteQuizAPI = async (id) => {
   try {
-    const request = await apiService.get(`/delete-quiz/`);
+    const request = await apiService.get(`/delete-quiz/${id}`);
     return request;
   } catch (error) {
     throw error;

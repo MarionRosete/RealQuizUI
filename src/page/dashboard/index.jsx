@@ -19,7 +19,7 @@ const Dashboard = () => {
     handleCloseCreateRoom,
     handleOpenCreateQandA,
     handleCloseCreateQandA,
-    deleteQuiz,
+    handleDeleteQuiz,
   }=useContext(TeacherStateContext);
   const QandAPopoverContents = [
     {
@@ -38,7 +38,7 @@ const Dashboard = () => {
     {
       name: 'Delete',
       description: 'Delete quiz and its questions and answers',
-      onClick: deleteQuiz,
+      onClick: handleDeleteQuiz,
       icon: ()=> deleteIcon(),
     },
   ];
@@ -59,7 +59,7 @@ const Dashboard = () => {
       </div>
       {teacherQuiz?.length ===0?
       <div className='flex justify-center items-center gap-x-2'>
-        You have no classes yet.
+        You have no Quiz yet.
         <button
           className='p-1'
           onClick={handleOpenCreateRoom}
