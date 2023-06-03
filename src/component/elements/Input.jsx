@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const Input = ({type, onChange, placeholder, max, autoComplete}) => {
+const Input = ({type, onChange, placeholder, max, autoComplete,defaultValue}) => {
   return (
     <input className="
         appearance-none
@@ -21,6 +21,7 @@ const Input = ({type, onChange, placeholder, max, autoComplete}) => {
     autoComplete={autoComplete}
     maxLength={max}
     size={max}
+    defaultValue={defaultValue}
     />
   );
 };

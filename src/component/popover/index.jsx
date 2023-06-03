@@ -10,7 +10,7 @@ const PopoverComponent=({ButtonToClick, Content, data})=> {
     <Popover className="relative">
       {({open}) => (
         <>
-          <Popover.Button>
+          <Popover.Button className={'pt-1 pb-1 pl-0 pr-0'}>
             {ButtonToClick}
           </Popover.Button>
           <Transition

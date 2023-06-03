@@ -1,6 +1,9 @@
 
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {createQuizAPI, getTeacherQuizAPI, deleteQuizAPI} from '../../api/quiz';
+import {createQuizAPI,
+  getTeacherQuizAPI,
+  deleteQuizAPI,
+  editQuizAPI} from '../../api/quiz';
 
 export const useGetTeacherQuiz = () => {
   return useQuery(['get-teacher-quiz'], ()=>getTeacherQuizAPI());
@@ -24,6 +27,16 @@ export const useDeleteTeacherQuiz = () => {
       queryClient.invalidateQueries('get-teacher-quiz');
     },
   },
-
   );
 };
+export const useEditTeacherQuiz = () => {
+  const queryClient = useQueryClient();
+  return useMutation(editQuizAPI, {
+    onSuccess: ()=>{
+      queryClient.invalidateQueries('get-teacher-quiz');
+    },
+  },
+  );
+};
+
+

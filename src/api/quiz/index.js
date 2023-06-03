@@ -29,3 +29,13 @@ export const deleteQuizAPI = async (id) => {
     throw error;
   };
 };
+
+export const editQuizAPI = async (id) => {
+  try {
+    const request = await apiService.get(`/update-quiz/${id}`);
+    return request;
+  } catch (error) {
+    throw error;
+  };
+};
+

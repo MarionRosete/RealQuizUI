@@ -7,6 +7,7 @@ import TextArea from '../../component/elements/TextArea';
 import {useCreateTeacherQuiz} from '../../queryhooks/quiz';
 import {useContext} from 'react';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
+import {DownloadIcon} from '../../component/icons';
 
 
 const initDataState = {
@@ -15,11 +16,19 @@ const initDataState = {
 };
 
 const CreateQuiz = () => {
-  const {userAuth}=useContext(TeacherStateContext);
+  const {userAuth, setToast}=useContext(TeacherStateContext);
   const [send, setSend] = useState(initDataState);
   const {mutate: createQuiz, isLoading: Creating}=useCreateTeacherQuiz();
   const handleCreateQuiz = () => {
-    createQuiz({...send, owner: userAuth.id});
+    createQuiz({...send, owner: userAuth.id}, {
+      onSuccess: ()=>{
+        setToast({
+          isOpen: true,
+          msg: 'Successfully Created Quiz',
+          icon: <DownloadIcon/>,
+        });
+      },
+    });
   };
   return (
     <div className="mt-10">

@@ -4,10 +4,8 @@ import Modal from '../../component/modal/index.jsx';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
 import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
-import {DarkMode} from '../../helper/DarkMode.js';
-import PopoverComponent from '../../component/popover/index.jsx';
+import QuizCard from '../../component/TeacherDashboard/QuizCard.jsx';
 // import Sidebar from '../sidebar/index.jsx';
-import {viewIcon, editIcon, deleteIcon} from '../../helper/quiz/index.jsx';
 
 const Dashboard = () => {
   const {
@@ -20,28 +18,8 @@ const Dashboard = () => {
     handleOpenCreateQandA,
     handleCloseCreateQandA,
     handleDeleteQuiz,
+    handleEditQuiz,
   }=useContext(TeacherStateContext);
-  const QandAPopoverContents = [
-    {
-      name: 'View',
-      description: 'View quiz questions and answers',
-      onClick: handleOpenCreateQandA,
-      icon: ()=>viewIcon(),
-
-    },
-    {
-      name: 'Edit',
-      description: 'Edit quiz name and description',
-      href: '##',
-      icon: ()=>editIcon(),
-    },
-    {
-      name: 'Delete',
-      description: 'Delete quiz and its questions and answers',
-      onClick: handleDeleteQuiz,
-      icon: ()=> deleteIcon(),
-    },
-  ];
   return (
     <div className='min-h-screen'>
       <div className='flex justify-between m-6'>
@@ -67,32 +45,16 @@ const Dashboard = () => {
           Create now
         </button>
       </div> :
-      <div className='flex m-10 justify-center gap-x-5'>
+      <div className='grid md:grid-cols-2 md:gap-16 gap-8 m-10'>
         {
           teacherQuiz?.map((quiz, key)=>
-            <div key={key}>
-              <PopoverComponent
-                ButtonToClick={
-                  <div className={`shadow-lg 
-                    ${DarkMode?'shadow-[#2E638B]':'shadow-gray-500/50'}
-                    p-6 
-                    rounded-md`
-                  }
-                  >
-                    <div className='text-xl font-bold'>
-                      {quiz.name}
-                    </div>
-                    <div className='pl-5 '>
-                      {quiz.description}
-                    </div>
-                  </div>
-                }
-                Content={
-                  QandAPopoverContents
-                }
-                data={quiz}
-              />
-            </div>,
+            <QuizCard
+              key={key}
+              quiz={quiz}
+              handleDelete={handleDeleteQuiz}
+              handleView = {handleOpenCreateQandA}
+              handleEdit={handleEditQuiz}
+            />,
           )
         }
       </div>

@@ -28,8 +28,8 @@ const IconButton = ({Icon, onClick, toolTip}) => {
     <>
       <div id="tooltipButton" onClick={onClick}
         className='
-          w-7
-          h-7
+          w-5
+          h-5
           border-solid
           border-2
           border-zinc-600

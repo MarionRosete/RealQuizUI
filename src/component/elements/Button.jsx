@@ -30,7 +30,7 @@ const Button = ({onClick, disabled, loading, content, Icon}) => {
       disabled={disabled||loading}
     >{loading?
       <><Spinner /><span>Loading...</span></>:
-      <>{Icon}{content}</>
+      <div className='flex gap-x-2'>{Icon}{content}</div>
 
       }
     </button>

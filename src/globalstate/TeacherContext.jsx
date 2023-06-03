@@ -1,9 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, {createContext, useEffect, useState} from 'react';
 import {getAuthUser} from '../api/auth';
-import {useGetTeacherQuiz, useDeleteTeacherQuiz} from '../queryhooks/quiz';
+import {
+  useGetTeacherQuiz,
+  useDeleteTeacherQuiz,
+  useEditTeacherQuiz} from '../queryhooks/quiz';
 import {getQandAAPI} from '../api/qanda';
 import {logoutAPI} from '../api/auth';
+import ToastComponent from '../component/toast';
+import {DeleteIcon, EditIcon} from '../component/icons';
 
 
 export const TeacherStateContext = createContext({});
@@ -22,6 +27,12 @@ const emptyQandA= {
   answer: null,
 };
 
+const toastInitState = {
+  isOpen: false,
+  msg: null,
+  icon: null,
+};
+
 export const TeacherStateProvider = (props) =>{
   const [modal, setModal] = useState(initCreateRoomState);
   const [userAuth, setUserAuth] = useState();
@@ -29,6 +40,8 @@ export const TeacherStateProvider = (props) =>{
   const [QandA, setQandA] = useState(null);
   const {data: teacherQuiz}=useGetTeacherQuiz();
   const {mutate: deleteQuiz} = useDeleteTeacherQuiz();
+  const {mutate: editQuiz} = useEditTeacherQuiz();
+  const [toast, setToast] = useState(toastInitState);
 
   const getAuth = async ()=>{
     const req= await getAuthUser();
@@ -63,7 +76,26 @@ export const TeacherStateProvider = (props) =>{
     setModal({...modal, QandA: false});
   };
   const handleDeleteQuiz = (quiz) => {
-    deleteQuiz(quiz.id);
+    deleteQuiz(quiz.id, {
+      onSuccess: ()=>{
+        setToast({...toast,
+          isOpen: true,
+          msg: 'hello',
+          icon: <DeleteIcon/>,
+        });
+      },
+    });
+  };
+  const handleEditQuiz = (quiz) => {
+    editQuiz(quiz.id, {
+      onSuccess: ()=>{
+        setToast({...toast,
+          isOpen: true,
+          msg: 'hello',
+          icon: <EditIcon/>,
+        });
+      },
+    });
   };
   return (
     <TeacherStateContext.Provider
@@ -81,9 +113,17 @@ export const TeacherStateProvider = (props) =>{
         handleOpenCreateQandA,
         handleCloseCreateQandA,
         handleDeleteQuiz,
+        handleEditQuiz,
+        setToast,
       }}
     >
       {props.children}
+      {toast.isOpen&&
+      <ToastComponent
+        Msg={toast.msg}
+        Icon={toast.icon}
+      />
+      }
     </TeacherStateContext.Provider>
   );
 };
