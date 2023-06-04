@@ -21,12 +21,25 @@ const Button = ({onClick, disabled, loading, content, Icon, size, type}) => {
     }
   };
   const handleType = () => {
+    const defOutlined = `
+      border
+      border-[#535bf2]
+      text-white
+      hover:text-white
+      hover:bg-[#646cff]
+    `;
+    const dangerOutlined = `
+      border
+      border-red-700
+      hover:bg-red-800
+      hover:text-white
+      text-red-800`;
     switch (type) {
-      case 'danger':
-        return 'border border-red-700 hover:bg-red-800 hover:text-white text-red-800';
+      case 'danger-outlined':
+        return dangerOutlined;
         break;
       default:
-        return 'border border-transparent bg-[#646cff]';
+        return defOutlined;
         break;
     }
   };
@@ -39,13 +52,7 @@ const Button = ({onClick, disabled, loading, content, Icon, size, type}) => {
         ${handleType()}
         ${handleSize()}
         font-medium
-        text-white
-        hover:bg-[#535bf2]
-        dark:hover:bg-purple-800
-        focus:outline-none
-        focus-visible:ring-2
-        focus-visible:ring-blue-500
-        focus-visible:ring-offset-2
+        disabled:cursor-not-allowed
         disabled:bg-inherit
         disabled:hover:bg-gray-500
         disabled:text-gray-400`}

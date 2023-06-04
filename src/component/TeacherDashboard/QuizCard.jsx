@@ -8,10 +8,12 @@ import {
   EditIcon,
   DeleteIcon,
   ViewIcon,
-  SaveIcon} from '../icons';
+  CancelIcon,
+  CheckIcon} from '../icons';
 import PopoverComponent from '../popover';
 import Input from '../elements/Input';
 import TextArea from '../elements/TextArea';
+
 
 const initEditState = {
   open: false,
@@ -88,15 +90,20 @@ const QuizCard = ({quiz, handleView, handleDelete}) => {
       </div>
       <div className='m-4 mt-6'>
         {edit.open?
-        <div className='flex items-center gap-x-2'>
+        <div className='flex justify-end items-center gap-x-2'>
           <Button
-            Icon={<SaveIcon size={'small'}/>}
+            content={'Cancel'}
+            size={'xsmall'}
+            type={'danger-outlined'}
+            Icon={<CancelIcon size={'small'}/>}
+          />
+          <Button
+            Icon={<CheckIcon size={'small'}/>}
             content={'Save'}
             size={'xsmall'}
           />
-          <Button content={'Cancel'} size={'xsmall'} type={'danger'}/>
         </div>:
-        <div>
+        <div className='flex justify-end'>
           <Button
             Icon={
               <PencilIcon

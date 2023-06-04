@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Header from '../../component/header';
 import ForgotPassword from '../auth/ForgotPassword';
-import Login from '../auth/Login';
+import Login from '../auth/login';
 import Register from '../auth/Register';
 import VerificationCodeSent from '../auth/VerificationCodeSent';
 

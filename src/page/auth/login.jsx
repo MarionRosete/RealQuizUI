@@ -151,6 +151,7 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
                           (data.email===null||!validateEmail(data.email))||
                           (data.password===null||data.password==='')
                         }
+                        size={'small'}
                         content={'Sign In'}
                         loading={data.loading}
                       />
