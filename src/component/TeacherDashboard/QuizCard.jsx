@@ -7,9 +7,11 @@ import {
   PencilIcon,
   EditIcon,
   DeleteIcon,
-  ViewIcon} from '../icons';
+  ViewIcon,
+  SaveIcon} from '../icons';
 import PopoverComponent from '../popover';
 import Input from '../elements/Input';
+import TextArea from '../elements/TextArea';
 
 const initEditState = {
   open: false,
@@ -49,7 +51,14 @@ const QuizCard = ({quiz, handleView, handleDelete}) => {
     `
     }
     >
-      <div className='flex  justify-between text-xl font-bold'>
+      <div className='flex justify-end hover:color-[#535bf2]' >
+        <PopoverComponent
+          data={quiz}
+          ButtonToClick={<EllipsisIcon/>}
+          Content={QandAPopoverContents}
+        />
+      </div>
+      <div className='m-2 text-xl font-bold'>
         {edit.open?
           <Input
             type={'text'}
@@ -62,20 +71,13 @@ const QuizCard = ({quiz, handleView, handleDelete}) => {
               )
             }
           />:quiz.name}
-        <div className='cursor-pointer hover:color-[#535bf2]' >
-          <PopoverComponent
-            data={quiz}
-            ButtonToClick={<EllipsisIcon/>}
-            Content={QandAPopoverContents}
-          />
-        </div>
       </div>
-      <div className='p-1 text-slate-500 text-sm '>
+      <div className='m-2 text-slate-500 text-sm '>
         {edit.open?
-          <Input
+          <TextArea
             type={'text'}
-            placeholder={'Name'}
-            defaultValue={quiz.description}
+            placeholder={'Description'}
+            value={quiz.description}
             onChange={(e)=>
               setEdit(
                   {...edit,
@@ -84,11 +86,28 @@ const QuizCard = ({quiz, handleView, handleDelete}) => {
             }
           />:quiz.description}
       </div>
-      <div className='mt-3'>
-        <Button
-          Icon={<PencilIcon/>}
-          content={'View'}
-        />
+      <div className='m-4 mt-6'>
+        {edit.open?
+        <div className='flex items-center gap-x-2'>
+          <Button
+            Icon={<SaveIcon size={'small'}/>}
+            content={'Save'}
+            size={'xsmall'}
+          />
+          <Button content={'Cancel'} size={'xsmall'} type={'danger'}/>
+        </div>:
+        <div>
+          <Button
+            Icon={
+              <PencilIcon
+                size={'small'}
+              />
+            }
+            content={'View'}
+            size={'medium'}
+          />
+        </div>
+        }
       </div >
     </div>
   );

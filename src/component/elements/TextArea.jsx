@@ -6,7 +6,7 @@ const TextArea = ({placeholder, rows, onChange, value}) => {
     <textarea
       id="textarea"
       rows={rows}
-      value={value}
+      defaultValue={value}
       className="block
         p-2.5
         w-full
