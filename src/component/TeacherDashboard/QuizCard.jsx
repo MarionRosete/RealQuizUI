@@ -112,6 +112,7 @@ const QuizCard = ({quiz, handleView, handleDelete}) => {
             }
             content={'View'}
             size={'medium'}
+            type={'def-contained'}
           />
         </div>
         }

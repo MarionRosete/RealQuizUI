@@ -28,6 +28,12 @@ const Button = ({onClick, disabled, loading, content, Icon, size, type}) => {
       hover:text-white
       hover:bg-[#646cff]
     `;
+    const defContained= `
+    bg-purple-500
+    text-white
+    hover:text-white
+    hover:bg-purple-400
+    `;
     const dangerOutlined = `
       border
       border-red-700
@@ -38,8 +44,11 @@ const Button = ({onClick, disabled, loading, content, Icon, size, type}) => {
       case 'danger-outlined':
         return dangerOutlined;
         break;
-      default:
+      case 'def-outlined':
         return defOutlined;
+        break;
+      default:
+        return defContained;
         break;
     }
   };

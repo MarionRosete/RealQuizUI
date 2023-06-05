@@ -27,12 +27,14 @@ const Dashboard = () => {
         <Button
           content={'Logout'}
           onClick={handleLogout}
+          size={'small'}
         />
       </div>
       <div className='flex justify-end m-6'>
         <Button
           content={'Create Quiz'}
           onClick={handleOpenCreateRoom}
+          size={'small'}
         />
       </div>
       {teacherQuiz?.length ===0?
