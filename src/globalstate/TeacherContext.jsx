@@ -80,22 +80,20 @@ export const TeacherStateProvider = (props) =>{
       onSuccess: ()=>{
         setToast({...toast,
           isOpen: true,
-          msg: 'hello',
+          msg: 'Successfully deleted quiz',
           icon: <DeleteIcon/>,
         });
       },
     });
   };
   const handleEditQuiz = (quiz) => {
-    editQuiz(quiz.id, {
-      onSuccess: ()=>{
-        setToast({...toast,
-          isOpen: true,
-          msg: 'hello',
-          icon: <EditIcon/>,
-        });
-      },
-    });
+    editQuiz(quiz, {onSuccess: ()=>{
+      setToast({...toast,
+        isOpen: true,
+        msg: 'Successfully edited quiz',
+        icon: <EditIcon/>,
+      });
+    }});
   };
   return (
     <TeacherStateContext.Provider

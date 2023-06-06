@@ -30,9 +30,11 @@ export const deleteQuizAPI = async (id) => {
   };
 };
 
-export const editQuizAPI = async (id) => {
+export const editQuizAPI = async (payload) => {
   try {
-    const request = await apiService.get(`/update-quiz/${id}`);
+    const request = await apiService.post(`/update-quiz`, payload, {
+      'Accept': 'application/json',
+    });
     return request;
   } catch (error) {
     throw error;

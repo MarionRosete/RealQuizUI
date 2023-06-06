@@ -15,12 +15,12 @@ import Input from '../elements/Input';
 import TextArea from '../elements/TextArea';
 
 
-const initEditState = {
-  open: false,
-  name: '',
-  description: '',
-};
-const QuizCard = ({quiz, handleView, handleDelete}) => {
+const QuizCard = ({quiz, handleView, handleDelete, handleEdit}) => {
+  const initEditState = {
+    open: false,
+    name: quiz.name,
+    description: quiz.description,
+  };
   const [edit, setEdit]=useState(initEditState);
   const QandAPopoverContents = [
     {
@@ -101,6 +101,7 @@ const QuizCard = ({quiz, handleView, handleDelete}) => {
             Icon={<CheckIcon size={'small'}/>}
             content={'Save'}
             size={'xsmall'}
+            onClick={()=>handleEdit({...edit, id: quiz.id})}
           />
         </div>:
         <div className='flex justify-end'>
