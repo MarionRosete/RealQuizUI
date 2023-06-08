@@ -15,10 +15,7 @@ const Dashboard = () => {
     modal,
     handleOpenCreateRoom,
     handleCloseCreateRoom,
-    handleOpenCreateQandA,
     handleCloseCreateQandA,
-    handleDeleteQuiz,
-    handleEditQuiz,
   }=useContext(TeacherStateContext);
   return (
     <div className='min-h-screen'>
@@ -53,9 +50,6 @@ const Dashboard = () => {
             <QuizCard
               key={key}
               quiz={quiz}
-              handleDelete={handleDeleteQuiz}
-              handleView = {handleOpenCreateQandA}
-              handleEdit={handleEditQuiz}
             />,
           )
         }

@@ -3,7 +3,6 @@ import TextArea from '../../component/elements/TextArea';
 import RadioButton from '../../component/elements/RadioButton';
 import Button from '../../component/elements/Button';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
-import {useAddQandA} from '../../queryhooks/qanda';
 
 const initData= {
   id: null,
@@ -15,33 +14,29 @@ const initData= {
   answer: null,
 };
 const QandAContents = () => {
-  const {quiz, QandA} = useContext(TeacherStateContext);
-  const [editQandA, setQandA] = useState([...QandA]);
-  const {mutate}= useAddQandA();
+  const {quiz, QandA, handleEditCreateQandA} = useContext(TeacherStateContext);
+  const [input, setInput] = useState([...QandA]);
 
   const handleQuestion = (e, key) => {
-    const arr = [...editQandA];
-    arr[key] = {...editQandA[key], question: e.target.value};
-    setQandA(arr);
+    const arr = [...input];
+    arr[key] = {...input[key], question: e.target.value};
+    setInput(arr);
   };
 
   const handleAnswer = (e, key) => {
-    const arr = [...editQandA];
-    arr[key] = {...editQandA[key], answer: e.target.value};
-    setQandA(arr);
+    const arr = [...input];
+    arr[key] = {...input[key], answer: e.target.value};
+    setInput(arr);
   };
 
   const handleChoice = (e, key, choice) => {
-    const arr = [...editQandA];
-    arr[key] = {...editQandA[key], [choice]: e.target.value, code: quiz.id};
-    setQandA(arr);
+    const arr = [...input];
+    arr[key] = {...input[key], [choice]: e.target.value, code: quiz.id};
+    setInput(arr);
   };
 
   const handleAddItem = () => {
-    setQandA([...editQandA, initData]);
-  };
-  const handleSubmitQuiz = () => {
-    mutate(editQandA);
+    setInput([...input, initData]);
   };
   return (
     <div className='mt-10 '>
@@ -54,7 +49,7 @@ const QandAContents = () => {
         id='qanda'
         className='space-y-10 overflow-y-auto h-80 snap-mandatory snap-y'
       >
-        {editQandA.map((data, key)=>
+        {input.map((data, key)=>
           <div key={key} className=' space-y-3 mr-2 ml-2 snap-center'>
             <div className='flex gap-x-3 items-center'>
               {key+1}.
@@ -127,7 +122,7 @@ const QandAContents = () => {
       <div className='mt-5'>
         <Button
           content={'Submit'}
-          onClick={handleSubmitQuiz}
+          onClick={()=>handleEditCreateQandA(input)}
         />
       </div>
     </div>

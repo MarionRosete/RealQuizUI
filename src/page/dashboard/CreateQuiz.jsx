@@ -4,10 +4,8 @@ import Input from '../../component/elements/Input';
 import Button from '../../component/elements/Button';
 import {useState} from 'react';
 import TextArea from '../../component/elements/TextArea';
-import {useCreateTeacherQuiz} from '../../queryhooks/quiz';
 import {useContext} from 'react';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
-import {DownloadIcon} from '../../component/icons';
 
 
 const initDataState = {
@@ -16,20 +14,11 @@ const initDataState = {
 };
 
 const CreateQuiz = () => {
-  const {userAuth, setToast}=useContext(TeacherStateContext);
+  const {
+    handleCreateQuiz,
+    cQuiz}=useContext(TeacherStateContext);
   const [send, setSend] = useState(initDataState);
-  const {mutate: createQuiz, isLoading: Creating}=useCreateTeacherQuiz();
-  const handleCreateQuiz = () => {
-    createQuiz({...send, owner: userAuth.id}, {
-      onSuccess: ()=>{
-        setToast({
-          isOpen: true,
-          msg: 'Successfully Created Quiz',
-          icon: <DownloadIcon/>,
-        });
-      },
-    });
-  };
+
   return (
     <div className="mt-10">
       {/* {error !==null&&
@@ -76,7 +65,7 @@ const CreateQuiz = () => {
               send.description===null||
               send.name.length>50||
               send.description.length>50||
-              Creating
+              cQuiz
             }
             content={'Create'}
             loading={Creating}

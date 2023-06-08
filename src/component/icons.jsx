@@ -31,7 +31,6 @@ export const EllipsisIcon = () => {
 };
 
 export const PencilIcon = ({size}) => {
-  console.log(handleSize(size));
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox={handleSize(size).view} className={handleSize(size).wh}>
       <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />

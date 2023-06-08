@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {DarkMode} from '../../helper/DarkMode';
 import Button from '../elements/Button';
 import {
@@ -13,9 +13,13 @@ import {
 import PopoverComponent from '../popover';
 import Input from '../elements/Input';
 import TextArea from '../elements/TextArea';
+import {TeacherStateContext} from '../../globalstate/TeacherContext';
 
 
-const QuizCard = ({quiz, handleView, handleDelete, handleEdit}) => {
+const QuizCard = ({quiz}) => {
+  const {handleEditQuiz,
+    handleDeleteQuiz,
+    handleOpenCreateQandA}=useContext(TeacherStateContext);
   const initEditState = {
     open: false,
     name: quiz.name,
@@ -26,7 +30,7 @@ const QuizCard = ({quiz, handleView, handleDelete, handleEdit}) => {
     {
       name: 'View',
       description: 'View quiz questions and answers',
-      onClick: handleView,
+      onClick: handleOpenCreateQandA,
       icon: ()=><ViewIcon/>,
 
     },
@@ -39,7 +43,7 @@ const QuizCard = ({quiz, handleView, handleDelete, handleEdit}) => {
     {
       name: 'Delete',
       description: 'Delete quiz and its questions and answers',
-      onClick: handleDelete,
+      onClick: handleDeleteQuiz,
       icon: ()=> <DeleteIcon/>,
     },
   ];
@@ -101,7 +105,7 @@ const QuizCard = ({quiz, handleView, handleDelete, handleEdit}) => {
             Icon={<CheckIcon size={'small'}/>}
             content={'Save'}
             size={'xsmall'}
-            onClick={()=>handleEdit({...edit, id: quiz.id})}
+            onClick={()=>handleEditQuiz({...edit, id: quiz.id})}
           />
         </div>:
         <div className='flex justify-end'>

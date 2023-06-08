@@ -4,12 +4,13 @@ import {getAuthUser} from '../api/auth';
 import {
   useGetTeacherQuiz,
   useDeleteTeacherQuiz,
+  useCreateTeacherQuiz,
   useEditTeacherQuiz} from '../queryhooks/quiz';
 import {getQandAAPI} from '../api/qanda';
 import {logoutAPI} from '../api/auth';
 import ToastComponent from '../component/toast';
-import {DeleteIcon, EditIcon} from '../component/icons';
-
+import {DeleteIcon, EditIcon, DownloadIcon} from '../component/icons';
+import {useCreateEditQandA} from '../queryhooks/qanda';
 
 export const TeacherStateContext = createContext({});
 const initCreateRoomState = {
@@ -42,7 +43,8 @@ export const TeacherStateProvider = (props) =>{
   const {mutate: deleteQuiz} = useDeleteTeacherQuiz();
   const {mutate: editQuiz} = useEditTeacherQuiz();
   const [toast, setToast] = useState(toastInitState);
-
+  const {mutate: createQuiz, isLoading: cQuiz}=useCreateTeacherQuiz();
+  const {mutate: createEditQandA, isLoading: cQandA} =useCreateEditQandA();
   const getAuth = async ()=>{
     const req= await getAuthUser();
     setUserAuth(req);
@@ -66,6 +68,17 @@ export const TeacherStateProvider = (props) =>{
   const handleCloseCreateRoom = () => {
     setModal({...modal, quiz: false});
   };
+  const handleCreateQuiz = () => {
+    createQuiz({...send, owner: userAuth.id}, {
+      onSuccess: ()=>{
+        setToast({
+          isOpen: true,
+          msg: 'Successfully Created Quiz',
+          icon: <DownloadIcon/>,
+        });
+      },
+    });
+  };
   const handleOpenCreateQandA= async (quiz) => {
     setQuiz(quiz);
     const qanda = await getQandAAPI(quiz.id);
@@ -74,6 +87,9 @@ export const TeacherStateProvider = (props) =>{
   };
   const handleCloseCreateQandA = () => {
     setModal({...modal, QandA: false});
+  };
+  const handleEditCreateQandA = (inputs) => {
+    createEditQandA(inputs);
   };
   const handleDeleteQuiz = (quiz) => {
     deleteQuiz(quiz.id, {
@@ -113,6 +129,10 @@ export const TeacherStateProvider = (props) =>{
         handleDeleteQuiz,
         handleEditQuiz,
         setToast,
+        handleCreateQuiz,
+        cQuiz,
+        handleEditCreateQandA,
+        cQandA,
       }}
     >
       {props.children}
