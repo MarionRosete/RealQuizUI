@@ -91,6 +91,12 @@ export const TeacherStateProvider = (props) =>{
   };
   const handleEditCreateQandA = (inputs) => {
     createEditQandA(inputs);
+    handleCloseCreateQandA();
+    setToast({...toast,
+      isOpen: true,
+      msg: 'Successfully saved questions and answer',
+      icon: <DeleteIcon/>,
+    });
   };
   const handleDeleteQuiz = (quiz) => {
     deleteQuiz(quiz.id, {

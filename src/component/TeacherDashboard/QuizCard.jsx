@@ -33,7 +33,7 @@ const QuizCard = ({quiz}) => {
     {
       name: 'View',
       description: 'View quiz questions and answers',
-      onClick: handleOpenCreateQandA,
+      onClick: ()=> handleOpenCreateQandA(quiz),
       icon: ()=><ViewIcon/>,
 
     },
@@ -133,7 +133,7 @@ const QuizCard = ({quiz}) => {
         </div>:
         <div className='flex justify-end'>
           <Button
-            onClick={handleOpenCreateQandA}
+            onClick={()=>handleOpenCreateQandA(quiz)}
             Icon={
               <PencilIcon
                 size={'small'}
