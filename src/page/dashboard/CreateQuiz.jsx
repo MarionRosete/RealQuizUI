@@ -17,7 +17,7 @@ const CreateQuiz = () => {
   const {
     handleCreateQuiz,
     cQuiz}=useContext(TeacherStateContext);
-  const [send, setSend] = useState(initDataState);
+  const [inputs, setInputs] = useState(initDataState);
 
   return (
     <div className="mt-10">
@@ -36,8 +36,8 @@ const CreateQuiz = () => {
               type={'text'}
               placeholder={'Name'}
               onChange={(e)=>
-                setSend(
-                    {...send,
+                setInputs(
+                    {...inputs,
                       name: e.target.value},
                 )
               }
@@ -52,23 +52,23 @@ const CreateQuiz = () => {
             <TextArea
               placeholder={'Description'}
               rows={'4'}
-              onChange={(e)=>setSend({...send,
+              onChange={(e)=>setInputs({...inputs,
                 description: e.target.value})}
             />
           </div>
         </div>
         <div className="mt-4">
           <Button
-            onClick={handleCreateQuiz}
+            onClick={()=>handleCreateQuiz(inputs)}
             disabled={
-              send.name===null||
-              send.description===null||
-              send.name.length>50||
-              send.description.length>50||
+              inputs.name===null||
+              inputs.description===null||
+              inputs.name.length>50||
+              inputs.description.length>50||
               cQuiz
             }
             content={'Create'}
-            loading={Creating}
+            loading={cQuiz}
           />
         </div>
       </form>

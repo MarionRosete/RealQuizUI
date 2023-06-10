@@ -68,14 +68,15 @@ export const TeacherStateProvider = (props) =>{
   const handleCloseCreateRoom = () => {
     setModal({...modal, quiz: false});
   };
-  const handleCreateQuiz = () => {
-    createQuiz({...send, owner: userAuth.id}, {
+  const handleCreateQuiz = (input) => {
+    createQuiz({...input, owner: userAuth.id}, {
       onSuccess: ()=>{
         setToast({
           isOpen: true,
           msg: 'Successfully Created Quiz',
           icon: <DownloadIcon/>,
         });
+        handleCloseCreateRoom();
       },
     });
   };
@@ -109,6 +110,7 @@ export const TeacherStateProvider = (props) =>{
         msg: 'Successfully edited quiz',
         icon: <EditIcon/>,
       });
+      handleCloseCreateRoom();
     }});
   };
   return (
