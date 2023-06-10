@@ -19,7 +19,10 @@ import {TeacherStateContext} from '../../globalstate/TeacherContext';
 const QuizCard = ({quiz}) => {
   const {handleEditQuiz,
     handleDeleteQuiz,
-    handleOpenCreateQandA}=useContext(TeacherStateContext);
+    handleOpenCreateQandA,
+    setToast,
+    toast,
+  }=useContext(TeacherStateContext);
   const initEditState = {
     open: false,
     name: quiz.name,
@@ -47,6 +50,9 @@ const QuizCard = ({quiz}) => {
       icon: ()=> <DeleteIcon/>,
     },
   ];
+  const handleCloseEdit = () => {
+    setEdit(initEditState);
+  };
   return (
     <div className={`
     border
@@ -100,16 +106,34 @@ const QuizCard = ({quiz}) => {
             size={'xsmall'}
             type={'danger-outlined'}
             Icon={<CancelIcon size={'small'}/>}
+            onClick={handleCloseEdit}
           />
           <Button
             Icon={<CheckIcon size={'small'}/>}
             content={'Save'}
             size={'xsmall'}
-            onClick={()=>handleEditQuiz({...edit, id: quiz.id})}
+            onClick={()=>{
+              const payload = {
+                id: quiz.id,
+                name: edit.name,
+                description: edit.description,
+              };
+              handleEditQuiz(payload, {
+                onSuccess: ()=>{
+                  setToast({...toast,
+                    isOpen: true,
+                    msg: 'Successfully edited quiz',
+                    icon: <EditIcon/>,
+                  });
+                  handleCloseEdit();
+                },
+              });
+            }}
           />
         </div>:
         <div className='flex justify-end'>
           <Button
+            onClick={handleOpenCreateQandA}
             Icon={
               <PencilIcon
                 size={'small'}

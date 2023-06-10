@@ -63,8 +63,8 @@ const CreateQuiz = () => {
             disabled={
               inputs.name===null||
               inputs.description===null||
-              inputs.name.length>50||
-              inputs.description.length>50||
+              inputs.name.length>100||
+              inputs.description.length>=255||
               cQuiz
             }
             content={'Create'}

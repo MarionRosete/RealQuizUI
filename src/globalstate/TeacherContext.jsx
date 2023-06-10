@@ -9,7 +9,7 @@ import {
 import {getQandAAPI} from '../api/qanda';
 import {logoutAPI} from '../api/auth';
 import ToastComponent from '../component/toast';
-import {DeleteIcon, EditIcon, DownloadIcon} from '../component/icons';
+import {DeleteIcon, DownloadIcon} from '../component/icons';
 import {useCreateEditQandA} from '../queryhooks/qanda';
 
 export const TeacherStateContext = createContext({});
@@ -41,7 +41,7 @@ export const TeacherStateProvider = (props) =>{
   const [QandA, setQandA] = useState(null);
   const {data: teacherQuiz}=useGetTeacherQuiz();
   const {mutate: deleteQuiz} = useDeleteTeacherQuiz();
-  const {mutate: editQuiz} = useEditTeacherQuiz();
+  const {mutate: handleEditQuiz} = useEditTeacherQuiz();
   const [toast, setToast] = useState(toastInitState);
   const {mutate: createQuiz, isLoading: cQuiz}=useCreateTeacherQuiz();
   const {mutate: createEditQandA, isLoading: cQandA} =useCreateEditQandA();
@@ -102,16 +102,6 @@ export const TeacherStateProvider = (props) =>{
         });
       },
     });
-  };
-  const handleEditQuiz = (quiz) => {
-    editQuiz(quiz, {onSuccess: ()=>{
-      setToast({...toast,
-        isOpen: true,
-        msg: 'Successfully edited quiz',
-        icon: <EditIcon/>,
-      });
-      handleCloseCreateRoom();
-    }});
   };
   return (
     <TeacherStateContext.Provider
