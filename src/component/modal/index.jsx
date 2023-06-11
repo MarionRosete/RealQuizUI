@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 
 
-const Modal = ({Contents, isOpen, closeModal, title, maxHeight}) => {
+const Modal = ({Contents, isOpen, closeModal, title, maxWidth}) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -40,12 +40,13 @@ const Modal = ({Contents, isOpen, closeModal, title, maxHeight}) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className={`${maxHeight}
+              <Dialog.Panel className={`${maxWidth}
             dark:bg-zinc-800
             max-w-md
             transform
             overflow-hidden
-            max-h-[90%]
+            max-h-full
+            max-h-md
             w-full
             rounded-2xl
             bg-white
@@ -83,7 +84,7 @@ Modal.propTypes = {
   closeModal: PropTypes.func,
   Contents: PropTypes.func,
   title: PropTypes.string,
-  maxHeight: PropTypes.any,
+  maxWidth: PropTypes.any,
 };
 
 export default Modal;

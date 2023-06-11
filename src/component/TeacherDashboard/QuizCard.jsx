@@ -20,8 +20,6 @@ const QuizCard = ({quiz}) => {
   const {handleEditQuiz,
     handleDeleteQuiz,
     handleOpenCreateQandA,
-    setToast,
-    toast,
   }=useContext(TeacherStateContext);
   const initEditState = {
     open: false,
@@ -57,6 +55,7 @@ const QuizCard = ({quiz}) => {
     <div className={`
     border
     border-inherit
+    border-purple-600
     p-6 
     rounded-md
     ${DarkMode?'shadow-[#2E638B]':'shadow-gray-500/50'}
@@ -84,7 +83,8 @@ const QuizCard = ({quiz}) => {
             }
           />:quiz.name}
       </div>
-      <div className='m-2 text-slate-500 text-sm '>
+      <div className={`m-2 
+        ${DarkMode?'text-slate-300':'text-slate-600'} text-sm `}>
         {edit.open?
           <TextArea
             type={'text'}
@@ -118,16 +118,7 @@ const QuizCard = ({quiz}) => {
                 name: edit.name,
                 description: edit.description,
               };
-              handleEditQuiz(payload, {
-                onSuccess: ()=>{
-                  setToast({...toast,
-                    isOpen: true,
-                    msg: 'Successfully edited quiz',
-                    icon: <EditIcon/>,
-                  });
-                  handleCloseEdit();
-                },
-              });
+              handleEditQuiz(payload);
             }}
           />
         </div>:
