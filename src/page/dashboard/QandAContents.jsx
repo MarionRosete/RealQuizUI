@@ -39,28 +39,27 @@ const QandAContents = () => {
     setInput([...input, initData]);
   };
   return (
-    <div className='mt-10 '>
-      <div className='mt-5 mb-5'>
-        <button onClick={handleAddItem}>
-          Add item
-        </button>
-      </div>
+    <div className='flex flex-col mt-7 min-h-full '>
       <div
         id='qanda'
-        className='space-y-10 overflow-y-auto h-80 snap-mandatory snap-y'
+        className="space-y-10
+        overflow-y-auto
+        h-[420px]
+        w-full
+        snap-mandatory snap-y"
       >
         {input.map((data, key)=>
-          <div key={key} className=' space-y-3 mr-2 ml-2 snap-center'>
-            <div className='flex gap-x-3 items-center'>
-              {key+1}.
+          <div key={key} className='space-y-3 mr-2 ml-2 snap-center'>
+            <div className='flex gap-x-5 items-center'>
+              <span className='w-4 font-extrabold'>{key+1}.</span>
               <TextArea
                 value={data.question?data.question:''}
                 placeholder={'Question'}
-                rows={'4'}
+                rows={'5'}
                 onChange={(e)=>handleQuestion(e, key)}
               />
             </div>
-            <div className='flex gap-x-3 items-center'>
+            <div className='flex gap-x-5 items-center'>
               <RadioButton
                 value={1}
                 checked={data.answer===1?true:null}
@@ -70,11 +69,11 @@ const QandAContents = () => {
               <TextArea
                 value={data.choice1?data.choice1:''}
                 placeholder={'Choice A'}
-                rows={'1'}
+                rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice1')}
               />
             </div>
-            <div className='flex gap-x-3 items-center'>
+            <div className='flex gap-x-5 items-center'>
               <RadioButton
                 value={2}
                 checked={data.answer===2?true:null}
@@ -84,11 +83,11 @@ const QandAContents = () => {
               <TextArea
                 value={data.choice2?data.choice2:''}
                 placeholder={'Choice B'}
-                rows={'1'}
+                rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice2')}
               />
             </div>
-            <div className='flex gap-x-3 items-center'>
+            <div className='flex gap-x-5 items-center'>
               <RadioButton
                 value={3}
                 checked={data.answer===3?true:null}
@@ -98,11 +97,11 @@ const QandAContents = () => {
               <TextArea
                 value={data.choice3?data.choice3:''}
                 placeholder={'Choice 3'}
-                rows={'1'}
+                rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice3')}
               />
             </div>
-            <div className='flex gap-x-3 items-center'>
+            <div className='flex gap-x-5 items-center'>
               <RadioButton
                 value={4}
                 checked={data.answer===4?true:null}
@@ -112,16 +111,22 @@ const QandAContents = () => {
               <TextArea
                 value={data.choice4?data.choice4:''}
                 placeholder={'Choice 4'}
-                rows={'1'}
+                rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice4')}
               />
             </div>
           </div>,
         )}
       </div>
-      <div className='mt-5'>
+      <div className='flex  justify-end items-end space-x-5 mt-6'>
+        <Button
+          onClick={handleAddItem}
+          content={'Add item'}
+          size={'small'}
+        />
         <Button
           content={'Submit'}
+          size={'small'}
           onClick={()=>handleEditCreateQandA(input)}
         />
       </div>
