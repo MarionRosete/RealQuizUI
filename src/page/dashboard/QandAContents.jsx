@@ -1,12 +1,13 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import TextArea from '../../component/elements/TextArea';
 import RadioButton from '../../component/elements/RadioButton';
 import Button from '../../component/elements/Button';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
+import {SaveIcon} from '../../component/icons';
 
 const initData= {
   id: null,
-  question: '',
+  question: null,
   choice1: null,
   choice2: null,
   choice3: null,
@@ -16,7 +17,7 @@ const initData= {
 const QandAContents = () => {
   const {quiz, QandA, handleEditCreateQandA} = useContext(TeacherStateContext);
   const [input, setInput] = useState([...QandA]);
-
+  const [hasEmpty, setHasEmpty] = useState(false);
   const handleQuestion = (e, key) => {
     const arr = [...input];
     arr[key] = {...input[key], question: e.target.value};
@@ -31,20 +32,33 @@ const QandAContents = () => {
 
   const handleChoice = (e, key, choice) => {
     const arr = [...input];
-    arr[key] = {...input[key], [choice]: e.target.value, code: quiz.id};
+    arr[key] = {...input[key], [choice]: e.target.value};
     setInput(arr);
   };
 
   const handleAddItem = () => {
-    setInput([...input, initData]);
+    setInput([...input, {...initData, code: quiz.id}]);
   };
+  useEffect(()=>{
+    input.map((data)=>{
+      if (
+        !data.question||!data.choice1||
+        !data.choice2||!data.choice3||
+        !data.choice4||!data.answer
+      ) {
+        setHasEmpty(true);
+      } else {
+        setHasEmpty(false);
+      }
+    });
+  }, [input]);
   return (
     <div className='flex flex-col mt-7 min-h-full '>
       <div
         id='qanda'
         className="space-y-10
         overflow-y-auto
-        h-[420px]
+        h-[520px]
         w-full
         snap-mandatory snap-y"
       >
@@ -53,10 +67,12 @@ const QandAContents = () => {
             <div className='flex gap-x-5 items-center'>
               <span className='w-4 font-extrabold'>{key+1}.</span>
               <TextArea
-                value={data.question?data.question:''}
+                value={data.question}
                 placeholder={'Question'}
                 rows={'5'}
                 onChange={(e)=>handleQuestion(e, key)}
+                error={!data.question}
+                helper={!data.question?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -67,10 +83,12 @@ const QandAContents = () => {
                 name={key}
               />
               <TextArea
-                value={data.choice1?data.choice1:''}
+                value={data.choice1}
                 placeholder={'Choice A'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice1')}
+                error={!data.choice1}
+                helper={!data.choice1?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -81,10 +99,12 @@ const QandAContents = () => {
                 name={key}
               />
               <TextArea
-                value={data.choice2?data.choice2:''}
+                value={data.choice2}
                 placeholder={'Choice B'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice2')}
+                error={!data.choice2}
+                helper={!data.choice2?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -95,10 +115,12 @@ const QandAContents = () => {
                 name={key}
               />
               <TextArea
-                value={data.choice3?data.choice3:''}
+                value={data.choice3}
                 placeholder={'Choice 3'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice3')}
+                error={!data.choice3}
+                helper={!data.choice3?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -109,10 +131,12 @@ const QandAContents = () => {
                 name={key}
               />
               <TextArea
-                value={data.choice4?data.choice4:''}
+                value={data.choice4}
                 placeholder={'Choice 4'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice4')}
+                error={!data.choice4}
+                helper={!data.choice4?'This field is required.':null}
               />
             </div>
           </div>,
@@ -125,9 +149,11 @@ const QandAContents = () => {
           size={'small'}
         />
         <Button
-          content={'Submit'}
+          content={'Save'}
+          Icon={<SaveIcon size={'small'}/>}
           size={'small'}
           onClick={()=>handleEditCreateQandA(input)}
+          disabled={hasEmpty}
         />
       </div>
     </div>
