@@ -83,7 +83,10 @@ export const TeacherStateProvider = (props) =>{
   const handleOpenCreateQandA= async (quiz) => {
     setQuiz(quiz);
     const qanda = await getQandAAPI(quiz.id);
-    setQandA(qanda.data.length>0?qanda.data:[emptyQandA]);
+    setQandA(
+        qanda.data.length>0?qanda.data:
+        [{...emptyQandA, code: quiz.id}],
+    );
     setModal({...modal, QandA: true});
   };
   const handleCloseCreateQandA = () => {
