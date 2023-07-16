@@ -39,7 +39,8 @@ const QandAContents = () => {
   const handleAddItem = () => {
     setInput([...input, {...initData, code: quiz.id}]);
   };
-  useEffect(()=>{
+
+  const handleSubmit = () => {
     input.map((data)=>{
       if (
         !data.question||!data.choice1||
@@ -49,18 +50,18 @@ const QandAContents = () => {
         setHasEmpty(true);
       } else {
         setHasEmpty(false);
+        handleEditCreateQandA(input)
       }
-    });
-  }, [input]);
+    })
+  }
   return (
-    <div className='flex flex-col mt-7 min-h-full '>
+    <div >
       <div
         id='qanda'
         className="space-y-10
         overflow-y-auto
-        h-[520px]
-        w-full
-        snap-mandatory snap-y"
+        snap-mandatory snap-y
+        "
       >
         {input.map((data, key)=>
           <div key={key} className='space-y-3 mr-2 ml-2 snap-center'>
@@ -71,8 +72,8 @@ const QandAContents = () => {
                 placeholder={'Question'}
                 rows={'5'}
                 onChange={(e)=>handleQuestion(e, key)}
-                error={!data.question}
-                helper={!data.question?'This field is required.':null}
+                error={!data.question&&hasEmpty}
+                helper={hasEmpty&&!data.question?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -87,8 +88,8 @@ const QandAContents = () => {
                 placeholder={'Choice A'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice1')}
-                error={!data.choice1}
-                helper={!data.choice1?'This field is required.':null}
+                error={hasEmpty&&!data.choice1}
+                helper={hasEmpty&&!data.choice1?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -103,8 +104,8 @@ const QandAContents = () => {
                 placeholder={'Choice B'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice2')}
-                error={!data.choice2}
-                helper={!data.choice2?'This field is required.':null}
+                error={hasEmpty&&!data.choice2}
+                helper={hasEmpty&&!data.choice2?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -119,8 +120,8 @@ const QandAContents = () => {
                 placeholder={'Choice 3'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice3')}
-                error={!data.choice3}
-                helper={!data.choice3?'This field is required.':null}
+                error={hasEmpty&&!data.choice3}
+                helper={hasEmpty&&!data.choice3?'This field is required.':null}
               />
             </div>
             <div className='flex gap-x-5 items-center'>
@@ -135,8 +136,8 @@ const QandAContents = () => {
                 placeholder={'Choice 4'}
                 rows={'2'}
                 onChange={(e)=>handleChoice(e, key, 'choice4')}
-                error={!data.choice4}
-                helper={!data.choice4?'This field is required.':null}
+                error={hasEmpty&&!data.choice4}
+                helper={hasEmpty&&!data.choice4?'This field is required.':null}
               />
             </div>
           </div>,
@@ -152,7 +153,7 @@ const QandAContents = () => {
           content={'Save'}
           Icon={<SaveIcon size={'small'}/>}
           size={'small'}
-          onClick={()=>handleEditCreateQandA(input)}
+          onClick={handleSubmit}
           disabled={hasEmpty}
         />
       </div>
