@@ -9,6 +9,7 @@ const App=()=> {
   }
   return (
     <Router
+      basepath='/RealQuizUI/'
       location={location}
       routes={token!==null?PrivateRoute:PublicRoute}
     >
