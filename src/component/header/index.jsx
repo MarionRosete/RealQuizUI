@@ -51,7 +51,7 @@ const Header=({openModal}) =>{
               />
             </a>
             <div className='
-              text-purple-700
+              text-blue-700
               font-bold'
             >
             RealQuiz

@@ -63,7 +63,8 @@ const Select=({Lists, setSelected, selected})=>{
                 ring-black
                 ring-opacity-5
                 focus:outline-none
-                sm:text-sm">
+                sm:text-sm
+                z-50">
               {Lists.map((data, index) => (
                 <Listbox.Option
                   key={index}
@@ -90,7 +91,7 @@ const Select=({Lists, setSelected, selected})=>{
                             flex
                             items-center
                             pl-3
-                            text-purple-600">
+                            text-blue-600">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                         </span>
                       ) : null}

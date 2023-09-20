@@ -29,10 +29,10 @@ const Button = ({onClick, disabled, loading, content, Icon, size, type}) => {
       hover:bg-[#646cff]
     `;
     const defContained= `
-    bg-purple-600
+    bg-blue-600
     text-white
     hover:text-white
-    hover:bg-purple-500
+    hover:bg-blue-500
     `;
     const dangerOutlined = `
       border

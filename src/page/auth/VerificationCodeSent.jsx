@@ -48,7 +48,7 @@ const VerificationCodeSent=({isOpen, closeModal})=>{
                     transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl font-bold leading-6 text-purple-700"
+                    className="text-xl font-bold leading-6 text-blue-700"
                   >
                     Thanks for signing up
                   </Dialog.Title>

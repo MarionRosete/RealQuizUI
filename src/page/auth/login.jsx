@@ -98,7 +98,7 @@ const Login = ({isOpen, closeModal, forgotPassword}) => {
                   font-bold
                   leading-10
                   text-gray-900
-                  text-purple-700"
+                  text-blue-700"
                 >
                  Sign In
                 </Dialog.Title>

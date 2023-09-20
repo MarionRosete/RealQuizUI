@@ -44,7 +44,7 @@ const Root = () => {
         '
       >
         <div className='content'>
-          <div className='text-7xl text-purple-700'>
+          <div className='text-7xl text-blue-700'>
             RealQuiz
           </div>
 

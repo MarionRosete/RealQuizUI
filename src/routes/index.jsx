@@ -6,12 +6,17 @@ import PageNotFound from '../page/404';
 import UnVerifiedEmail from '../page/Unverified';
 import {TeacherStateProvider} from '../globalstate/TeacherContext';
 import ErrorPage from '../page/error';
+import CreateQuizSteps from '../page/dashboard/CreateQuizSteps';
 
 
 export const PrivateRoute = [
   {
     path: '/dashboard',
     element: <TeacherStateProvider><Dashboard/></TeacherStateProvider>,
+  },
+  {
+    path: '/create-quiz',
+    element:<CreateQuizSteps/>
   },
   {
     path: 'unverified-email',

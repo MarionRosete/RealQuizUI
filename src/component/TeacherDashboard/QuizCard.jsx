@@ -14,6 +14,7 @@ import PopoverComponent from '../popover';
 import Input from '../elements/Input';
 import TextArea from '../elements/TextArea';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
+import ReactEditor from '../texteditor/Editor.jsx';
 
 
 const QuizCard = ({quiz}) => {
@@ -54,11 +55,13 @@ const QuizCard = ({quiz}) => {
   return (
     <div className={`
     border
-    border-inherit
-    border-purple-600
+    border-1
+    border-grey-200
+    shadow-sm
     p-6 
+  
     rounded-md
-    ${DarkMode?'shadow-[#2E638B]':'shadow-gray-500/50'}
+   
     `
     }
     >
@@ -98,6 +101,7 @@ const QuizCard = ({quiz}) => {
             }
           />:quiz.description}
       </div>
+      <ReactEditor/>
       <div className='m-4 mt-6'>
         {edit.open?
         <div className='flex justify-end items-center gap-x-2'>
@@ -126,12 +130,12 @@ const QuizCard = ({quiz}) => {
           <Button
             onClick={()=>handleOpenCreateQandA(quiz)}
             Icon={
-              <PencilIcon
-                size={'small'}
+              <ViewIcon
+                size={'xsmall'}
               />
             }
             content={'View'}
-            size={'medium'}
+            size={'xsmall'}
             type={'def-contained'}
           />
         </div>

@@ -9,6 +9,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@editorjs/checklist": "latest",
+    "@editorjs/code": "latest",
+    "@editorjs/delimiter": "latest",
+    "@editorjs/editorjs": "latest",
+    "@editorjs/embed": "latest",
+    "@editorjs/header": "latest",
+    "@editorjs/image": "latest",
+    "@editorjs/inline-code": "latest",
+    "@editorjs/link": "latest",
+    "@editorjs/list": "latest",
+    "@editorjs/marker": "latest",
+    "@editorjs/paragraph": "latest",
+    "@editorjs/quote": "latest",
+    "@editorjs/raw": "latest",
+    "@editorjs/simple-image": "latest",
+    "@editorjs/table": "latest",
+    "@editorjs/warning": "latest",
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
     "@tanstack/react-location": "^3.7.4",
@@ -18,7 +35,8 @@
     "flowbite-react": "^0.4.2",
     "gh-pages": "^5.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-editor-js": "latest"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

@@ -5,7 +5,10 @@ import {TeacherStateContext} from '../../globalstate/TeacherContext';
 import QandAContents from './QandAContents.jsx';
 import CreateQuiz from './CreateQuiz.jsx';
 import QuizCard from '../../component/TeacherDashboard/QuizCard.jsx';
+import ReactEditor from '../../component/texteditor/Editor.jsx';
+import { useNavigate } from '@tanstack/react-location';
 // import Sidebar from '../sidebar/index.jsx';
+
 
 const Dashboard = () => {
   const {
@@ -17,6 +20,8 @@ const Dashboard = () => {
     handleCloseCreateRoom,
     handleCloseCreateQandA,
   }=useContext(TeacherStateContext);
+  const  navigate = useNavigate(); 
+
   return (
     <div className='min-h-screen'>
       <div className='flex justify-between m-6'>
@@ -30,8 +35,9 @@ const Dashboard = () => {
       <div className='flex justify-end m-6'>
         <Button
           content={'Create Quiz'}
-          onClick={handleOpenCreateRoom}
+          onClick={()=> navigate({ to: '/create-quiz'})}
           size={'small'}
+        
         />
       </div>
       {teacherQuiz?.length ===0?
@@ -54,7 +60,9 @@ const Dashboard = () => {
           )
         }
       </div>
+     
       }
+       <ReactEditor/>
       <Modal
         isOpen={modal.quiz}
         closeModal={handleCloseCreateRoom}

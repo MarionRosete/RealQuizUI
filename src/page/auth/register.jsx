@@ -115,7 +115,7 @@ const Register = ({isOpen, closeModal, verify}) => {
                   font-bold
                   leading-10
                   text-gray-900
-                  text-purple-700"
+                  text-blue-700"
                 >
                   Sign Up
                 </Dialog.Title>

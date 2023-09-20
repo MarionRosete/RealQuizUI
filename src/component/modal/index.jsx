@@ -64,7 +64,7 @@ const Modal = ({Contents, isOpen, closeModal, title, maxWidth}) => {
                 font-bold
                 leading-10
                 text-gray-900
-                text-purple-700"
+                text-blue-700"
                 >
                   {title}
                 </Dialog.Title>
