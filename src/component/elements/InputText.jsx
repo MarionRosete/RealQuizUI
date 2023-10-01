@@ -14,21 +14,18 @@ const InputText = ({
         }
         <input 
             type="text"  
-            lassName={inputStyle} 
+            className={inputStyle} 
             placeholder={placeholder} 
             disabled={disable}
         />
-        <p class={helperStyle}>
+        <p className={helperStyle}>
             {helper}
         </p>
     </div>
   )
 }
 
-const labelStyle = `
-    block mb-2 text-sm font-medium 
-    ${error?DarkMode?"text-red-600":"text-red-600":DarkMode?"dark:text-white":"text-gray-900"} 
-`
+const labelStyle = `block mb-2 text-sm font-medium text-gray-900 dark:text-white `
 
 const inputStyle = `
     bg-gray-50 border border-gray-300 text-gray-900 text-sm 

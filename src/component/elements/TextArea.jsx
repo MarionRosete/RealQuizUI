@@ -1,29 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({placeholder, rows, onChange, value, error, helper}) => {
+const TextArea = ({placeholder, rows, onChange, value, error, helper, label}) => {
   return (
     <div className='w-full'>
+      {label?
+        <label  className={labelStyle}>
+            {label}
+        </label>
+        :
+        null
+        }
       <textarea
-        id="textarea"
         rows={rows}
         defaultValue={value}
-        className="block
-        p-2.5
-        text-sm
-        text-gray-900
-        rounded-lg
-        w-full
-        border
-        border-gray-500
-        focus:ring-blue-500
-        focus:border-blue-500
-        dark:bg-gray-700
-        dark:border-gray-600
-        dark:placeholder-gray-400
-        dark:text-white
-        dark:focus:ring-blue-500
-        dark:focus:border-blue-500"
+        className={textAreaStyle}
         placeholder={placeholder}
         onChange={onChange}
         style={error?
@@ -40,6 +31,25 @@ const TextArea = ({placeholder, rows, onChange, value, error, helper}) => {
 
   );
 };
+
+const labelStyle = `block mb-2 text-sm font-medium text-gray-900 dark:text-white `
+const textAreaStyle = `block
+p-2.5
+text-sm
+text-gray-900
+rounded-lg
+w-full
+border
+border-gray-500
+focus:ring-blue-500
+focus:border-blue-500
+dark:bg-gray-700
+dark:border-gray-600
+dark:placeholder-gray-400
+dark:text-white
+dark:focus:ring-blue-500
+dark:focus:border-blue-500`
+
 
 TextArea.propTypes = {
   value: PropTypes.any,
