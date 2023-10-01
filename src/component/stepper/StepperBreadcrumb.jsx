@@ -34,6 +34,7 @@ const container =
     text-center 
     text-gray-500 
     bg-white  
+    dark:bg-gray-700
     rounded-lg 
     sm:text-base 
     sm:p-4 
@@ -53,9 +54,10 @@ const activeInactiveStep = (ind,active) => {
             w-6 h-6 
             mr-2 text-xs 
             border border-1
-            ${ind<=active? DarkMode?"border-blue-500":"border-blue-600": DarkMode?"border-gray-500":"border-gray-600"}
+            ${ind<=active? 'dark:border-blue-500 border-blue-600':"dark:border-gray-500 border-gray-600"}
             rounded-full 
-            shrink-0 dark:border-blue-500
+            shrink-0 
+            
             
         `
         
