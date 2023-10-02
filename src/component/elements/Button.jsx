@@ -23,16 +23,17 @@ const Button = ({onClick, disabled, loading, content, Icon, size, type}) => {
   const handleType = () => {
     const defOutlined = `
       border
-      border-[#535bf2]
+      border-blue-600
       text-white
       hover:text-white
-      hover:bg-[#646cff]
+      hover:bg-blue-700
+      bg-blue-600
     `;
     const defContained= `
     bg-blue-600
     text-white
     hover:text-white
-    hover:bg-blue-500
+    hover:bg-blue-700
     `;
     const dangerOutlined = `
       border

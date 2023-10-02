@@ -16,7 +16,7 @@ export const PrivateRoute = [
   },
   {
     path: '/create-quiz',
-    element:<CreateQuizSteps/>
+    element:<TeacherStateProvider><CreateQuizSteps/></TeacherStateProvider>
   },
   {
     path: 'unverified-email',

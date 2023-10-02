@@ -16,7 +16,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  
 }
+.codex-editor{
+  padding-bottom: unset;
+  overflow-y: scroll;
+  
+}
+
+.ce-block__content,
+.ce-toolbar__content {
+  max-width: unset;
+  max-height: unset;
+  width: 89% !important;
+}
+/* .ce-toolbar__plus{
+  color: white;
+} */
 
 a {
   font-weight: 500;

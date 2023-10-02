@@ -2,7 +2,7 @@ import React from 'react'
 import { DarkMode } from '../../helper/DarkMode'
 
 const InputText = ({
-    size, disable, helper, error, label,placeholder}) => {
+    size, disable, helper, error, label,placeholder, required}) => {
   return (
     <div>
         {label?
@@ -17,6 +17,7 @@ const InputText = ({
             className={inputStyle} 
             placeholder={placeholder} 
             disabled={disable}
+            required={required}
         />
         <p className={helperStyle}>
             {helper}

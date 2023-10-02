@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({placeholder, rows, onChange, value, error, helper, label}) => {
+const TextArea = ({placeholder, rows, onChange, value, error, helper, label, id}) => {
   return (
-    <div className='w-full'>
+    <div className='w-full' id={id}>
       {label?
         <label  className={labelStyle}>
             {label}
