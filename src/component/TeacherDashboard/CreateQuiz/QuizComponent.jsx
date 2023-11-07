@@ -94,14 +94,14 @@ const QuizComponent = ({ ind, value, type, data, readOnly }) => {
         <Tab.Panels>
           {quiz().map((data, key) => (
             <Tab.Panel className="mt-2" key={key}>
-              <ReactEditor
+              {/* <ReactEditor
                 id={`${ind}-${data}`}
                 placeholder={`Write ${data} here`}
                 onChange={onChangeInput}
                 value={value[data]}
                 field={data}
-              />
-              {/* <TextArea/> */}
+              /> */}
+              <TextArea/>
             </Tab.Panel>
           ))}
         </Tab.Panels>
