@@ -52,7 +52,11 @@ export const PublicRoute = [
   },
   {
     path: "/",
-    element: <Root />,
+    element: (
+      <CreateQuizProvider>
+        <CreateQuizSteps />
+      </CreateQuizProvider>
+    ),
   },
   {
     path: "/*",
