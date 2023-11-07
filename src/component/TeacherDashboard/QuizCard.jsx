@@ -15,7 +15,6 @@ import PopoverComponent from "../popover";
 import Input from "../elements/Input";
 import TextArea from "../elements/TextArea";
 import { TeacherStateContext } from "../../globalstate/TeacherContext";
-import ReactEditor from "../texteditor/Editor.jsx";
 
 const QuizCard = ({ quiz }) => {
   const { handleEditQuiz, handleDeleteQuiz, handleOpenCreateQandA } =
@@ -96,7 +95,6 @@ const QuizCard = ({ quiz }) => {
           quiz.description
         )}
       </div>
-      <ReactEditor />
       <div className="m-4 mt-6">
         {edit.open ? (
           <div className="flex justify-end items-center gap-x-2">
