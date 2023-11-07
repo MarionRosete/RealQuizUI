@@ -1,22 +1,20 @@
-import React, {Fragment, useState, useEffect} from 'react';
-import {Dialog, Transition} from '@headlessui/react';
-import Label from '../../component/elements/Label';
-import Input from '../../component/elements/Input';
-import Button from '../../component/elements/Button';
-import PropTypes from 'prop-types';
-import Select from '../../component/elements/Select';
-import {
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
-import {registerAPI} from '../../api/auth';
-import {validateEmail} from '../../helper/ValidateEmail';
+import React, { Fragment, useState, useEffect } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import Label from "../../component/elements/Label";
+import Input from "../../component/elements/Input";
+import Button from "../../component/elements/Button";
+import PropTypes from "prop-types";
+import Select from "../../component/elements/Select";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { registerAPI } from "../../api/auth";
+import { validateEmail } from "../../library/ValidateEmail";
 
 const Account = [
-  {value: 0, name: 'Select Account'},
-  {value: 1, name: 'Student'},
-  {value: 1, name: 'Teacher'},
+  { value: 0, name: "Select Account" },
+  { value: 1, name: "Student" },
+  { value: 1, name: "Teacher" },
 ];
-const Register = ({isOpen, closeModal, verify}) => {
+const Register = ({ isOpen, closeModal, verify }) => {
   const [data, setData] = useState({
     email: null,
     name: null,
@@ -34,31 +32,33 @@ const Register = ({isOpen, closeModal, verify}) => {
     role: Account[0],
     loading: false,
   };
-  useEffect(()=>{
+  useEffect(() => {
     //  CLEAR STATE
     if (!isOpen) {
-      setData(initState); setError(null);
-    };
+      setData(initState);
+      setError(null);
+    }
   }, [isOpen]);
 
-  const handleRegister = async ()=>{
-    setData({...data, loading: true});
-    const request = await registerAPI({...data,
+  const handleRegister = async () => {
+    setData({ ...data, loading: true });
+    const request = await registerAPI({
+      ...data,
       role: data.role.name.toLocaleLowerCase(),
     });
 
-    if (request.status===200) {
-      localStorage.setItem('token', request.data.token);
+    if (request.status === 200) {
+      localStorage.setItem("token", request.data.token);
       closeModal();
-      verify((oldState)=>({
-        ...oldState, verify: true,
+      verify((oldState) => ({
+        ...oldState,
+        verify: true,
       }));
     } else {
       setError(request.response.data.message);
     }
-    setData({...data, loading: false});
+    setData({ ...data, loading: false });
   };
-
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -76,7 +76,8 @@ const Register = ({isOpen, closeModal, verify}) => {
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="
+          <div
+            className="
           flex
           min-h-full
           items-center
@@ -93,7 +94,8 @@ const Register = ({isOpen, closeModal, verify}) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full
+              <Dialog.Panel
+                className="w-full
               max-w-md
               transform
               overflow-hidden
@@ -104,13 +106,15 @@ const Register = ({isOpen, closeModal, verify}) => {
               text-center
               align-middle
               shadow-xl
-              transition-all">
-                <div className='flex justify-end'>
-                  <div className='h-4 w-4 cursor-pointer' onClick={closeModal}>
+              transition-all"
+              >
+                <div className="flex justify-end">
+                  <div className="h-4 w-4 cursor-pointer" onClick={closeModal}>
                     <XMarkIcon />
                   </div>
                 </div>
-                <Dialog.Title className="text-3xl
+                <Dialog.Title
+                  className="text-3xl
                   font-medium
                   font-bold
                   leading-10
@@ -120,90 +124,88 @@ const Register = ({isOpen, closeModal, verify}) => {
                   Sign Up
                 </Dialog.Title>
                 <div className="mt-10">
-                  {error !==null&&
-                    <div className='pb-4 text-red-700 text-sm'>
-                      {error}
-                    </div>
-                  }
-                  <form className="w-full max-w-sm"
-                    onSubmit={(e)=>{
+                  {error !== null && (
+                    <div className="pb-4 text-red-700 text-sm">{error}</div>
+                  )}
+                  <form
+                    className="w-full max-w-sm"
+                    onSubmit={(e) => {
                       e.preventDefault();
                       handleRegister();
-                    }
-                    }
+                    }}
                   >
                     <div className="md:flex md:items-center mb-6">
                       <div className="hidden lg:block md:w-1/3">
-                        <Label content={'Account'}/>
+                        <Label content={"Account"} />
                       </div>
                       <div className="md:w-2/3 flex justify-center lg:block">
                         <Select
                           Lists={Account}
                           selected={data.role}
-                          setSelected={(e)=>
-                            setData({...data, role: e})
+                          setSelected={(e) => setData({ ...data, role: e })}
+                        />
+                      </div>
+                    </div>
+                    <div className="md:flex md:items-center mb-6">
+                      <div className="md:w-1/3">
+                        <Label content={"Email"} />
+                      </div>
+                      <div className="md:w-2/3">
+                        <Input
+                          type={"text"}
+                          autoComplete={"email"}
+                          placeholder={"Email"}
+                          onChange={(e) =>
+                            setData({ ...data, email: e.target.value })
                           }
                         />
                       </div>
                     </div>
                     <div className="md:flex md:items-center mb-6">
                       <div className="md:w-1/3">
-                        <Label content={'Email'}/>
+                        <Label content={"Name"} />
                       </div>
                       <div className="md:w-2/3">
                         <Input
-                          type={'text'}
-                          autoComplete={'email'}
-                          placeholder={'Email'}
-                          onChange={(e)=>
-                            setData({...data, email: e.target.value})
+                          max={"50"}
+                          type={"text"}
+                          autoComplete={"name"}
+                          placeholder={"Name"}
+                          onChange={(e) =>
+                            setData({ ...data, name: e.target.value })
                           }
                         />
                       </div>
                     </div>
                     <div className="md:flex md:items-center mb-6">
                       <div className="md:w-1/3">
-                        <Label content={'Name'}/>
+                        <Label content={"Password"} />
                       </div>
                       <div className="md:w-2/3">
                         <Input
-                          max={'50'}
-                          type={'text'}
-                          autoComplete={'name'}
-                          placeholder={'Name'}
-                          onChange={(e)=>
-                            setData({...data, name: e.target.value})
+                          type={"password"}
+                          autoComplete={"new-password"}
+                          placeholder={"*************"}
+                          onChange={(e) =>
+                            setData({ ...data, password: e.target.value })
                           }
                         />
                       </div>
                     </div>
                     <div className="md:flex md:items-center mb-6">
                       <div className="md:w-1/3">
-                        <Label content={'Password'}/>
+                        <Label content={"Confirm Password"} />
                       </div>
                       <div className="md:w-2/3">
                         <Input
-                          type={'password'}
-                          autoComplete={'new-password'}
-                          placeholder={'*************'}
-                          onChange={(e)=>
-                            setData({...data, password: e.target.value})
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="md:flex md:items-center mb-6">
-                      <div className="md:w-1/3">
-                        <Label content={'Confirm Password'}/>
-                      </div>
-                      <div className="md:w-2/3">
-                        <Input
-                          type={'password'}
-                          autoComplete={'new-password'}
-                          placeholder={'*************'}
-                          onChange={(e)=>
-                            setData({...data, password_confirmation:
-                              e.target.value})
+                          type={"password"}
+                          autoComplete={"new-password"}
+                          placeholder={"*************"}
+                          onChange={(e) =>
+                            setData({
+                              ...data,
+                              password_confirmation: e.target.value,
+                            })
                           }
                         />
                       </div>
@@ -211,23 +213,22 @@ const Register = ({isOpen, closeModal, verify}) => {
                     <div className="mt-4">
                       <Button
                         loading={data.loading}
-                        content={'Sign Up'}
+                        content={"Sign Up"}
                         onClick={handleRegister}
                         disabled={
-                          (data.email===null||!validateEmail(data.email))||
-                          data.name===null||
-                          (data.password===null ||
-                            data.password.length<8 ||
-                            data.password!==data.password_confirmation
-                          )||
-                          data.password_confirmation===null||
-                          data.role.value===0
+                          data.email === null ||
+                          !validateEmail(data.email) ||
+                          data.name === null ||
+                          data.password === null ||
+                          data.password.length < 8 ||
+                          data.password !== data.password_confirmation ||
+                          data.password_confirmation === null ||
+                          data.role.value === 0
                         }
                       />
                     </div>
                   </form>
                 </div>
-
               </Dialog.Panel>
             </Transition.Child>
           </div>

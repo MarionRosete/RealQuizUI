@@ -4,10 +4,10 @@ import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid';
 import PropTypes from 'prop-types';
 
 
-const Select=({Lists, setSelected, selected})=>{
+const Select=({Lists, setSelected, selected, disabled})=>{
   return (
     <div className={`w-44`}>
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={setSelected} disabled={disabled}>
         <div className="relative mt-1">
           <Listbox.Button
             className="

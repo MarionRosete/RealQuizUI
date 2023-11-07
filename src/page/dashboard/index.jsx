@@ -1,13 +1,8 @@
 import React, {useContext} from 'react';
 import Button from '../../component/elements/Button.jsx';
-import Modal from '../../component/modal/index.jsx';
 import {TeacherStateContext} from '../../globalstate/TeacherContext';
-import QandAContents from './QandAContents.jsx';
-import CreateQuiz from './CreateQuiz.jsx';
 import QuizCard from '../../component/TeacherDashboard/QuizCard.jsx';
-import ReactEditor from '../../component/texteditor/Editor.jsx';
 import { useNavigate } from '@tanstack/react-location';
-// import Sidebar from '../sidebar/index.jsx';
 
 
 const Dashboard = () => {
@@ -62,20 +57,6 @@ const Dashboard = () => {
       </div>
      
       }
-       <ReactEditor/>
-      <Modal
-        isOpen={modal.quiz}
-        closeModal={handleCloseCreateRoom}
-        Contents={CreateQuiz}
-        title={'Create room'}
-      />
-      <Modal
-        isOpen={modal.QandA}
-        closeModal={handleCloseCreateQandA}
-        Contents={QandAContents}
-        title={'Q and A '}
-        maxWidth={`md:max-w-[80%]`}
-      />
     </div>
   );
 };

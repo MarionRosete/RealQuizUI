@@ -26,8 +26,8 @@ const Button = ({onClick, disabled, loading, content, Icon, size, type}) => {
       border-blue-600
       text-white
       hover:text-white
-      hover:bg-blue-700
-      bg-blue-600
+      hover:border-blue-700
+     
     `;
     const defContained= `
     bg-blue-600
