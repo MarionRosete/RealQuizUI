@@ -41,29 +41,29 @@ export const PrivateRoute = [
 ];
 
 export const PublicRoute = [
+  // {
+  //   path: "/changepassword/:token",
+  //   element: <ChangePassword />,
+  //   children: [
+  //     {
+  //       path: ":token",
+  //     },
+  //   ],
+  // },
   {
-    path: "/changepassword/:token",
-    element: <ChangePassword />,
-    children: [
-      {
-        path: ":token",
-      },
-    ],
-  },
-  {
-    path: "/",
+    path: "/*",
     element: (
       <CreateQuizProvider>
         <CreateQuizSteps />
       </CreateQuizProvider>
     ),
   },
-  {
-    path: "/*",
-    element: <PageNotFound />,
-  },
-  {
-    path: "/error",
-    element: <ErrorPage />,
-  },
+  // {
+  //   path: "/*",
+  //   element: <PageNotFound />,
+  // },
+  // {
+  //   path: "/error",
+  //   element: <ErrorPage />,
+  // },
 ];
