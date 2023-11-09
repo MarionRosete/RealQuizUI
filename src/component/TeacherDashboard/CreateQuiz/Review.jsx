@@ -7,9 +7,9 @@ const Review = () => {
   const { info, input, onChangeInput } = useContext(CreateQuizContext);
   return (
     <div>
-      <div className="mb-6 text-xl font-bold">
-        <p >{info.name}</p>
-        <p >{info.description}</p>
+      <div className="mb-6 font-medium">
+        <p className="text-lg">{info.name}</p>
+        <p className="text-sm">{info.description}</p>
       </div>
 
       <div

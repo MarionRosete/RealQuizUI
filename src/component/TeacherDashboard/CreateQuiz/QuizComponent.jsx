@@ -41,6 +41,7 @@ const QuizComponent = ({ ind, value, type, data, readOnly }) => {
         return Identification;
         break;
       default:
+        return []
         break;
     }
   };

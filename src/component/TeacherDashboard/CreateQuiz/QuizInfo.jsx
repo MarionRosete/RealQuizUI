@@ -9,13 +9,15 @@ const QuizInfo = () => {
   const { onChangeInfo,info } = useContext(CreateQuizContext);
   return (
     <div className="md:flex items-start justify-between">
-      <div className="md:w-3/5">
+      <div className="md:w-3/5 space-y-3">
         <InputText
           label={"Quiz name"}
           placeholder={"Data structures & algorithms"}
           required={true}
           onChange={(e) => onChangeInfo(e.target.value, "name")}
           value={info.name}
+          error={info.error.name}
+          errormsg={info.error.name}
         />
         <TextArea
           placeholder={
@@ -25,6 +27,8 @@ const QuizInfo = () => {
           rows={"2"}
           value={info.description}
           onChange={(e) => onChangeInfo(e.target.value, "description")}
+          error={info.error.description}
+          errormsg={info.error.description}
         />
       </div>
       <div className="md:w-1/3 mt-6 md:mt-0 dark:text-gray-400 text-gray-600 text-xs md:text-base">

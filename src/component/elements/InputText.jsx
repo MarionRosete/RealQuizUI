@@ -11,6 +11,7 @@ const InputText = ({
   required,
   onChange,
   value,
+  errormsg,
 }) => {
   return (
     <div>
@@ -18,13 +19,30 @@ const InputText = ({
       <input
         type="text"
         className={inputStyle}
+        style={
+          error
+            ? {
+                borderColor: "red",
+                borderStyle: "solid",
+              }
+            : {}
+        }
         placeholder={placeholder}
         disabled={disable}
         required={required}
         onChange={onChange}
         value={value}
       />
-      <p className={helperStyle}>{helper}</p>
+      {error ? (
+        <div className="text-xs text-start font-bold text-red-500 mb-1">
+          {errormsg}
+        </div>
+      ) : null}
+      {helper ? (
+        <div className="text-xs text-start font-bold text-red-500 mb-1">
+          {helper}
+        </div>
+      ) : null}
     </div>
   );
 };

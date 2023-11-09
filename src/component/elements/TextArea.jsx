@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({placeholder, rows, onChange, value, error, helper, label, id, height}) => {
+const TextArea = ({placeholder, rows, onChange, value, error, errormsg, helper, label, id, height}) => {
   return (
     <div className="w-full" id={id}>
       {label ? <label className={labelStyle}>{label}</label> : null}
@@ -14,7 +14,6 @@ const TextArea = ({placeholder, rows, onChange, value, error, helper, label, id,
         style={
           error
             ? {
-                border: "2px",
                 borderColor: "red",
                 borderStyle: "solid",
                 height: height?.height,
@@ -22,8 +21,13 @@ const TextArea = ({placeholder, rows, onChange, value, error, helper, label, id,
             : { height: height?.height }
         }
       />
+      {error ? (
+        <div className="text-xs text-start font-bold text-red-500 mb-1">
+          {errormsg}
+        </div>
+      ) : null}
       {helper ? (
-        <div className="text-xs text-start font-bold text-red-500">
+        <div className="text-xs text-start font-bold text-red-500 mb-1">
           {helper}
         </div>
       ) : null}

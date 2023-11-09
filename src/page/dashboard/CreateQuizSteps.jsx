@@ -6,7 +6,9 @@ import QuizInfo from "../../component/TeacherDashboard/CreateQuiz/QuizInfo";
 import QuestionAndAnswer from "../../component/TeacherDashboard/CreateQuiz/QuestionAndAnswer";
 import Button from "../../component/elements/Button";
 import { useNavigate } from "@tanstack/react-location";
-import CreateQuizProvider, { CreateQuizContext } from "../../context/CreateQuiz";
+import CreateQuizProvider, {
+  CreateQuizContext,
+} from "../../context/CreateQuiz";
 import Review from "../../component/TeacherDashboard/CreateQuiz/Review";
 
 const steps = [
@@ -22,14 +24,9 @@ const steps = [
 ];
 
 const CreateQuizSteps = () => {
-  const {info} = useContext(CreateQuizContext)
+  const { info, handleNext, active, handleBack } =
+    useContext(CreateQuizContext);
   const navigate = useNavigate();
-  const [active, setActive] = useState(1);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setActive(active + 1);
-  };
 
   const HandleCancel = () => {
     navigate({ to: "/dashboard" });
@@ -43,43 +40,50 @@ const CreateQuizSteps = () => {
       {/* <p  className=' font-bold text-2xl mb-2'>
                 {steps[active-1].label}
             </p> */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleNext}>
         {active === 1 ? (
-            <QuizInfo />
+          <QuizInfo />
         ) : active === 2 ? (
-            <QuestionAndAnswer />
+          <QuestionAndAnswer />
         ) : active === 3 ? (
-            <Review />
+          <Review />
         ) : (
           <></>
         )}
       </form>
       <div className="mt-6 md:space-x-2 space-y-2 items-center">
-        {active > 1 ? (
+        {
+          active > 1 ? (
+            <Button
+              content={`Back: ${steps[active - 2].label}`}
+              size={"small"}
+              type={"def-outlined"}
+              onClick={handleBack}
+            />
+          ) : null
+          // (
+          //   <Button
+          //     content={"Cancel"}
+          //     size={"small"}
+          //     type={"def-outlined"}
+          //     onClick={HandleCancel}
+          //     di
+          //   />
+          // )
+        }
+
+        {steps.length !== active && (
           <Button
-            content={`Back: ${steps[active - 2].label}`}
+            content={
+              steps.length !== active
+                ? `Next: ${steps[active].label}`
+                : "Create Quiz"
+            }
             size={"small"}
-            type={"def-outlined"}
-            onClick={() => setActive(active - 1)}
-          />
-        ) : (
-          <Button
-            content={"Cancel"}
-            size={"small"}
-            type={"def-outlined"}
-            onClick={HandleCancel}
+            onClick={handleNext}
+            // disabled={info.name === "" || info.description === ""}
           />
         )}
-        <Button
-          content={
-            steps.length !== active
-              ? `Next: ${steps[active].label}`
-              : "Create Quiz"
-          }
-          size={"small"}
-          onClick={handleSubmit}
-          disabled={info.name===''||info.description===''}
-        />
       </div>
     </div>
   );

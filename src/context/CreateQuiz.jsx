@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { isValidInput } from "../library/FormValidation";
 
 export const CreateQuizContext = createContext({});
 
@@ -28,13 +29,38 @@ const CreateQuizProvider = (props) => {
     quiz: null,
   };
 
+  const initInfo = {
+    name: "",
+    description: "",
+  };
+
   const [input, setInput] = React.useState([{ ...initData }]);
   const [isRemoveMode, setIsRemoveMode] = React.useState(null);
-  const [info, setInfo] = useState({name:'',description:''})
+  const [info, setInfo] = useState({
+    ...initInfo,
+    error: { ...initInfo },
+  });
+  const [active, setActive] = useState(1);
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    const { error, ...inputs } = info;
+
+    if (isValidInput(inputs) === true) {
+      setActive(active + 1);
+      setInfo({ ...info, error: { ...initInfo } });
+    } else {
+      setInfo({ ...info, error: { ...isValidInput(inputs) } });
+    }
+  };
+
+  const handleBack = () => {
+    setActive(active - 1);
+  };
 
   const onChangeInfo = (value, key) => {
-    setInfo({...info,[key]:value})
-  }
+    setInfo({ ...info, [key]: value });
+  };
   const handleQuizType = (e, ind) => {
     switch (e.value) {
       case 1:
@@ -87,7 +113,6 @@ const CreateQuizProvider = (props) => {
   const onChangeInput = (e, value, key) => {
     const arr = [...input];
     arr[key] = { ...input[key], [value]: e };
-    // console.log(arr);
     setInput([...arr]);
   };
 
@@ -105,6 +130,9 @@ const CreateQuizProvider = (props) => {
         onChangeInput,
         onChangeInfo,
         info,
+        handleNext,
+        active,
+        handleBack,
       }}
     >
       {props.children}
