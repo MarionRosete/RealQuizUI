@@ -1,10 +1,11 @@
 import React, { Fragment, useState, useContext } from "react";
 import { Tab } from "@headlessui/react";
-import ReactEditor from "../../texteditor/Editor";
+// import ReactEditor from "../../texteditor/Editor";
 import Select from "../../elements/Select";
 import { CancelIcon, TrashIcon } from "../../icons";
 import IconButton from "../../elements/IconButton";
 import { CreateQuizContext } from "../../../context/CreateQuiz";
+import Textarea from "../../elements/TextArea";
 
 const QuizComponent = ({ ind, value, type, data, readOnly }) => {
   const {
@@ -94,14 +95,20 @@ const QuizComponent = ({ ind, value, type, data, readOnly }) => {
         <Tab.Panels>
           {quiz().map((data, key) => (
             <Tab.Panel className="mt-2" key={key}>
-              <ReactEditor
+              {/* <ReactEditor
                 id={`${ind}-${data}`}
                 placeholder={`Write ${data} here`}
                 onChange={onChangeInput}
                 value={value[data]}
                 field={data}
+              /> */}
+              <Textarea
+                height={{ height: "48vh" }}
+                onChange={(e) =>
+                  onChangeInput(e.target.value, data, parseInt(ind))
+                }
+                value={value[data]}
               />
-              <TextArea/>
             </Tab.Panel>
           ))}
         </Tab.Panels>

@@ -1,34 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({placeholder, rows, onChange, value, error, helper, label, id}) => {
+const TextArea = ({placeholder, rows, onChange, value, error, helper, label, id, height}) => {
   return (
-    <div className='w-full' id={id}>
-      {label?
-        <label  className={labelStyle}>
-            {label}
-        </label>
-        :
-        null
-        }
+    <div className="w-full" id={id}>
+      {label ? <label className={labelStyle}>{label}</label> : null}
       <textarea
         rows={rows}
         defaultValue={value}
         className={textAreaStyle}
         placeholder={placeholder}
         onChange={onChange}
-        style={error?
-          {border: '2px', borderColor: 'red', borderStyle: 'solid'}:{}
+        style={
+          error
+            ? {
+                border: "2px",
+                borderColor: "red",
+                borderStyle: "solid",
+                height: height?.height,
+              }
+            : { height: height?.height }
         }
       />
-      {helper?
-        <div className='text-xs text-start font-bold text-red-500'>
+      {helper ? (
+        <div className="text-xs text-start font-bold text-red-500">
           {helper}
-        </div>:null
-      }
+        </div>
+      ) : null}
     </div>
-
-
   );
 };
 
