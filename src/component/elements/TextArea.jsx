@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({placeholder, rows, onChange, value, error, errormsg, helper, label, id, height}) => {
+const TextArea = ({placeholder, rows, onChange, value, error, errormsg, helper, label, id, height, readOnly}) => {
   return (
     <div className="w-full" id={id}>
       {label ? <label className={labelStyle}>{label}</label> : null}
@@ -20,6 +20,7 @@ const TextArea = ({placeholder, rows, onChange, value, error, errormsg, helper, 
               }
             : { height: height?.height }
         }
+        readOnly={readOnly}
       />
       {error ? (
         <div className="text-xs text-start font-bold text-red-500 mb-1">

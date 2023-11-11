@@ -136,6 +136,7 @@ const QuizComponent = ({ ind, type, data, readOnly }) => {
                 }
                 value={data.quiz[quiz.field]}
                 placeholder={quiz.label}
+                readOnly={readOnly}
               />
             </Tab.Panel>
           ))}
