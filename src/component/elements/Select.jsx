@@ -3,14 +3,14 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import PropTypes from "prop-types";
 
-const Select = ({ Lists, setSelected, selected, disabled }) => {
+const Select = ({ Lists, setSelected, selected, disabled, placeholder,error }) => {
   return (
-    <div className={`w-44`}>
+    <div>
       <Listbox value={selected} onChange={setSelected} disabled={disabled}>
         <div className="relative mt-1">
           <Listbox.Button
-            className="
-                relative
+            className={`
+              relative
                 w-full
                 cursor-default
                 rounded-lg
@@ -21,15 +21,20 @@ const Select = ({ Lists, setSelected, selected, disabled }) => {
                 pr-10
                 text-left
                 shadow-md
+                ${error ? "dark:border-red-600 border-red-600" : null}
+                ${error ? " text-red-600" : null}
                 focus:outline-none
                 focus-visible:border-indigo-500
                 focus-visible:ring-2 focus-visible:ring-white
                 focus-visible:ring-opacity-75
                 focus-visible:ring-offset-2
                 focus-visible:ring-offset-orange-300
-                sm:text-sm"
+                sm:text-sm
+            `}
           >
-            <span className="block truncate">{selected.name}</span>
+            <span className="block truncate">
+              {selected?.name || placeholder}
+            </span>
             <span
               className="pointer-events-none
                 absolute inset-y-0
@@ -72,29 +77,29 @@ const Select = ({ Lists, setSelected, selected, disabled }) => {
               {Lists.map((data, index) => (
                 <Listbox.Option
                   key={index}
-                  className={`relative cursor-default select-none py-2 pl-10 pr-4 `}
+                  className={`relative cursor-default select-none py-2 pl-8 pr-4 `}
                   value={data}
                 >
                   {({ active }) => (
                     <>
                       <span
-                        className={`block truncate ${
+                        className={`block truncate text-sm ${
                           active ? "font-medium" : "font-normal"
                         }`}
                       >
                         {data.name}
                       </span>
-                      {data.name === selected.name ? (
+                      {data.name === selected?.name ? (
                         <span
                           className="absolute
                             inset-y-0
                             left-0
                             flex
                             items-center
-                            pl-3
+                            pl-1
                             text-blue-600"
                         >
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          <CheckIcon className="h-4 w-4" aria-hidden="true" />
                         </span>
                       ) : null}
                     </>
