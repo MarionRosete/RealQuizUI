@@ -5,9 +5,21 @@ export const CreateQuizContext = createContext({});
 
 const CreateQuizProvider = (props) => {
   const quizTypes = [
-    { value: 0, name: "Select Quiz Type" },
     { value: 1, name: "Multiple Choice" },
     { value: 2, name: "Identification" },
+  ];
+
+  
+  const Identification = {
+    question: null,
+    answer: null,
+  };
+
+  const answerList = [
+    { value: "A", name: "Choice A" },
+    { value: "B", name: "Choice B" },
+    { value: "C", name: "Choice C" },
+    { value: "D", name: "Choice D" },
   ];
 
   const Multiple = {
@@ -18,15 +30,11 @@ const CreateQuizProvider = (props) => {
     choice4: null,
     answer: null,
   };
-  const Identification = {
-    question: null,
-    answer: null,
-  };
 
   const initData = {
     id: null,
     type: quizTypes[0],
-    quiz: null,
+    quiz: Multiple,
   };
 
   const initInfo = {
@@ -34,7 +42,11 @@ const CreateQuizProvider = (props) => {
     description: "",
   };
 
-  const [input, setInput] = React.useState([{ ...initData }]);
+  
+
+  const [input, setInput] = React.useState([
+    { ...initData, error: { ...initData } },
+  ]);
   const [isRemoveMode, setIsRemoveMode] = React.useState(null);
   const [info, setInfo] = useState({
     ...initInfo,
@@ -44,13 +56,34 @@ const CreateQuizProvider = (props) => {
 
   const handleNext = (e) => {
     e.preventDefault();
-    const { error, ...inputs } = info;
-
-    if (isValidInput(inputs) === true) {
-      setActive(active + 1);
-      setInfo({ ...info, error: { ...initInfo } });
-    } else {
-      setInfo({ ...info, error: { ...isValidInput(inputs) } });
+    switch (active) {
+      case 1:
+        const { error, ...inputs } = info;
+        if (isValidInput(inputs) === true) {
+          setActive(active + 1);
+          setInfo({ ...info, error: { ...initInfo } });
+        } else {
+          setInfo({ ...info, error: { ...isValidInput(inputs) } });
+        }
+        break;
+      case 2:
+       
+        const arr = [...input];
+        let isError = false;
+        input.map((qa, ind) => {
+          
+          isValidInput(qa.quiz)!==true? isError = true: isError = false
+          arr[ind] = {
+            ...input[ind],
+            error: { ...input[ind].error, quiz: isValidInput(qa.quiz) },
+          };
+        });
+        if(!isError){
+          setActive(active+1)
+        }
+        setInput([...arr])
+      default:
+        break;
     }
   };
 
@@ -67,6 +100,7 @@ const CreateQuizProvider = (props) => {
         input[ind] = {
           type: e,
           quiz: Multiple,
+          error: { ...initData },
         };
         setInput([...input]);
         break;
@@ -110,12 +144,13 @@ const CreateQuizProvider = (props) => {
     }, 100);
   };
 
-  const onChangeInput = (e, value, key) => {
+  const onChangeInput = (value, field, ind) => {
     const arr = [...input];
-    arr[key] = { ...input[key], [value]: e };
+    arr[ind] = { ...input[ind], quiz: { ...input[ind].quiz, [field]: value } };
     setInput([...arr]);
   };
 
+  console.log(input);
   return (
     <CreateQuizContext.Provider
       value={{
@@ -133,6 +168,7 @@ const CreateQuizProvider = (props) => {
         handleNext,
         active,
         handleBack,
+        answerList,
       }}
     >
       {props.children}
