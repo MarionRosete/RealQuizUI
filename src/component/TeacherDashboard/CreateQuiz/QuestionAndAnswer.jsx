@@ -17,14 +17,6 @@ const QuestionAndAnswer = () => {
     input,
     handleAddItem,
     handleQuizType,
-    handleAnswer,
-    handleSubmit,
-    hasEmpty,
-    isRemoveMode,
-    handleRemoveItem,
-    removeItem,
-    handleCancelRemoveItem,
-    info,
   } = useContext(CreateQuizContext);
   return (
     <div>
@@ -43,7 +35,6 @@ const QuestionAndAnswer = () => {
                 <div className="flex flex-col items-start gap-x-8 w-full ">
                   <QuizComponent
                     ind={key}
-                    value={input[key]}
                     type={data.type.value}
                     data={data}
                   />
